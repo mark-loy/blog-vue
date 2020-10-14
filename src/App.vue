@@ -1,32 +1,25 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <container/>
   </div>
 </template>
 
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+import container from "./components/common/layout/Container";
 
-#nav {
-  padding: 30px;
+export default {
+  name: "app",
+  components: {
+    container,
+  },
+};
+</script>
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+<style>
+/* 引入全局css文件 */
+@import "assets/css/global.css";
+/* 引入字体文件 */
+@import "assets/font/iconfont.css";
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
+
 </style>
