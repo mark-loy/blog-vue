@@ -1,12 +1,11 @@
 <template>
-  <div class="category">
+  <div class="tag">
     <!-- 引用文章导航组件 -->
     <article-nav-bar
-      ref="articleNav"
-      @findArticleById="findArticleByCateId"
-      :data="cateData"
-      title="分类"
-      type="cate"
+      @findArticleById="findArticleByTagId"
+      :data="tagData"
+      title="标签"
+      type="tag"
     ></article-nav-bar>
 
     <!-- 分类数据列表行 -->
@@ -41,30 +40,29 @@
 import articleCpn from "components/content/article/Article";
 import articleNavBar from "components/content/article/ArticleNavBar";
 
-import { mixin } from "common/mixin";
-
 import { request } from "plugins/network";
+
+import { mixin } from "common/mixin";
 
 export default {
   components: {
-    articleCpn,
     articleNavBar,
+    articleCpn,
   },
   mixins: [mixin],
   data() {
     return {
-      /* 分类展示数据源 */
-      cateData: [],
+      /* 标签菜单数据源 */
+      tagData: [],
     };
   },
   created() {
-    // 获取数据源
-    this.getAllCate();
+    this.getAllTagData();
   },
-  beforeCreate() {
-    /* 监听分类菜单切换，加载文章数据 */
+  mounted() {
+    /* 监听标签菜单切换,加载文章数据 */
     this.$bus.$on("tabNavBar", (id) => {
-      this.findArticleByCateId(id);
+      this.getArticleListData(id);
     });
   },
   beforeDestroy() {
@@ -72,20 +70,22 @@ export default {
     this.$bus.$off("tabNavBar");
   },
   methods: {
-    /* 获取所有分类数据源 */
-    getAllCate() {
+    /* 获取所有标签信息数据源 */
+    getAllTagData() {
       request({
         method: "get",
-        url: "/category/all",
+        url: "/tag/all",
       }).then((res) => {
-        if (res.code !== 200) return this.$message.error(res.message);
-        this.cateData = res.data.category;
+        // 提示错误信息
+        if (res.code !== 200) return this.$message.error(res.msg);
+        // 设置数据源
+        this.tagData = res.data.tags;
       });
     },
     /* 根据分类id查询文章 */
-    findArticleByCateId(cateId) {
+    findArticleByTagId(tagId) {
       // 设置查询的分类id
-      this.query.cate_id = cateId;
+      this.query.tag_id = tagId;
       // 刷新列表数据
       this.getArticleListData();
     },
@@ -94,55 +94,4 @@ export default {
 </script>
 
 <style scoped>
-.cate-all {
-  display: inline-block;
-  margin-left: 20px;
-  margin-bottom: 10px;
-  cursor: pointer;
-}
-
-.cate-all:hover .cate-all-name {
-  color: skyblue;
-}
-
-.cate-all:hover {
-  transform: scale(1.04);
-}
-
-.cate-all-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: #242424;
-}
-
-.cate-list {
-  display: inline-block;
-  margin-left: 14px;
-  margin-bottom: 10px;
-  cursor: pointer;
-}
-
-.cate-list:hover {
-  transform: scale(1.04);
-}
-
-.cate-count {
-  float: right;
-  margin-left: 20px;
-}
-
-.cate-list:hover .cate-name {
-  color: skyblue;
-}
-
-.cate-name {
-  display: inline-block;
-  font-size: 12px;
-  font-weight: 600;
-  color: #242424;
-}
-
-.active-class {
-  background-color: antiquewhite;
-}
 </style>

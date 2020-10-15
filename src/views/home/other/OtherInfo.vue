@@ -1,7 +1,6 @@
 <template>
   <!-- 判断otherinfo中是否存在数据， -->
   <div class="other-info" v-if="Object.keys(otherInfo).length !== 0">
-
     <!-- 个人信息区域 -->
     <div class="user-info">
       <!-- 头像 -->
@@ -30,20 +29,26 @@
         <i class="iconfont icon-leimupinleifenleileibie2"></i>
         分类
         <!-- 更多分类icon -->
-        <a href="#"><i class="el-icon-arrow-right more-icon"></i></a>
+        <a href="/category"><i class="el-icon-arrow-right more-icon"></i></a>
       </p>
       <!-- 分类列表 -->
-      <el-card
-        v-for="(cate, index) in otherInfo.cateTop"
+      <div
+        v-for="(cate, index) in otherInfo.cate"
         :key="cate.id"
-        shadow="always"
-        class="cate-list"
+        @click="toCategory(cate.id)"
       >
-        <span class="cate-name">{{ cate.categoryName }}</span>
-        <el-tag class="cate-count" :type="hotCateClass[index]" size="mini" effect="dark">
-          {{ cate.articleCount }}
-        </el-tag>
-      </el-card>
+        <el-card shadow="always" class="cate-list">
+          <span class="cate-name">{{ cate.categoryName }}</span>
+          <el-tag
+            class="cate-count"
+            :type="hotCateClass[index]"
+            size="mini"
+            effect="dark"
+          >
+            {{ cate.articleCount }}
+          </el-tag>
+        </el-card>
+      </div>
     </div>
 
     <!-- 标签区域 -->
@@ -53,14 +58,24 @@
         <i class="iconfont icon-biaoqian"></i>
         标签
         <!-- 更多标签icon -->
-        <a href="#"><i class="el-icon-arrow-right more-icon"></i></a>
+        <a href="/tag"><i class="el-icon-arrow-right more-icon"></i></a>
       </p>
       <!-- 标签列表 -->
-      <a href="#" v-for="tag in otherInfo.tagTop" :key="tag.id">
-        <el-tag class="tag-list" size="mini" type="danger" effect="plain">
+      <span
+        @click="toTag(tag.id)"
+        href="#"
+        v-for="(tag, index) in otherInfo.tag"
+        :key="tag.id"
+      >
+        <el-tag
+          class="tag-list"
+          size="mini"
+          :type="hotTagClass[index]"
+          effect="plain"
+        >
           {{ tag.tagName }}
         </el-tag>
-      </a>
+      </span>
     </div>
 
     <!-- 友情链接区域 -->
@@ -78,21 +93,50 @@
 </template>
 
 <script>
+import { mixin } from "common/mixin";
+
 export default {
   name: "OtherInfo",
+  mixins: [mixin],
   props: {
     otherInfo: {
       type: Object,
-      default: {}
+      default: {},
     },
   },
   data() {
     return {
       /* 分类样式 */
-      hotCateClass: ['danger', 'warning', 'primary'],
+      hotCateClass: ["danger", "warning", "success"],
       /* 标签样式 */
-      hotTagClass: ['danger', 'warning', 'primary', 'success']
+      hotTagClass: ["danger", "warning", "success", "primary"],
     };
+  },
+  methods: {
+    /* 路由跳转到分类页面 */
+    toCategory(cateId) {
+      // 路由跳转
+      this.$router.push("/category");
+      // 通过事件总线，发射事件
+      // nextTick: 路由跳转完成之后执行（异步操作）
+      this.$nextTick(() => { 
+        setTimeout(() => { //
+          this.$bus.$emit("tabNavBar", cateId);
+        }, 5);
+      });
+    },
+    /* 路由跳转到标签页面 */
+    toTag(tagId) {
+      // 路由跳转
+      this.$router.push("/tag");
+      // 通过事件总线，发射事件
+      // nextTick: 路由跳转完成之后执行（异步操作）
+      this.$nextTick(() => {
+        setTimeout(() => {
+          this.$bus.$emit("tabNavBar", tagId);
+        }, 5);
+      });
+    },
   },
 };
 </script>
@@ -176,6 +220,8 @@ export default {
 
 .more-icon {
   float: right;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .tag-list {

@@ -1,6 +1,7 @@
 <template>
   <!-- 导航栏区域 -->
   <div class="navbar">
+    
     <el-row type="flex" justify="space-around" align="middle">
       <!-- logo列 -->
       <el-col :xs="3" :sm="4" :md="4" :lg="4" :xl="4">
@@ -9,7 +10,9 @@
 
       <!-- 菜单列 -->
       <el-col :xs="0" :sm="12" :md="12" :lg="12" :xl="12">
-        <menu-list ref="menu" :parentActiveIndex="activeIndex" :isFloat="true"></menu-list>
+        <menu-list
+          :isFloat="true"
+        ></menu-list>
       </el-col>
 
       <!-- 搜索列 -->
@@ -32,8 +35,7 @@
 
     <!-- 抽屉区域：移动端菜单栏列表显示 -->
     <el-drawer :visible.sync="drawer" :with-header="false">
-      <menu-list ref="menuDrawer"
-        :parentActiveIndex="activeIndex"
+      <menu-list
         :isFloat="false"
         @closedDrawer="closedDrawer"
       ></menu-list>
@@ -55,7 +57,6 @@ export default {
       query: "",
       /* 控制抽屉显示、隐藏 */
       drawer: false,
-      activeIndex: '1'
     };
   },
   methods: {
@@ -66,16 +67,9 @@ export default {
     /* 关闭抽屉 */
     closedDrawer(index) {
       this.drawer = false;
-      this.activeIndex = index
+      this.activeIndex = index;
     },
   },
-  watch: {
-    activeIndex(value) {
-      console.log(value);
-      this.$refs.menuDrawer.showClass(value)
-      this.$refs.menu.showClass(value)
-    }
-  }
 };
 </script>
 

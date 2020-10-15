@@ -62,3 +62,11 @@ html, body {
 .el-pagination {
   margin-top: 10px;
 }
+
+.card-up {
+  margin-bottom: 25px;
+}
+
+.el-tag {
+  cursor: pointer;
+}

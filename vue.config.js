@@ -7,6 +7,7 @@ module.exports = {
     /* 配置别名 */
     config.resolve.alias
       .set("@", resolve("src"))
+      .set("common", resolve("src/common"))
       .set("assets", resolve("src/assets"))
       .set("components", resolve("src/components"))
       .set("plugins", resolve("src/plugins"))

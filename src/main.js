@@ -9,6 +9,9 @@ import './common/util'
 
 Vue.config.productionTip = false
 
+//在vue原型上挂载事件总线
+Vue.prototype.$bus = new Vue()
+
 new Vue({
   router,
   store,

@@ -1,5 +1,6 @@
 <template>
-<!-- 菜单列表区域 -->
+  <!-- 菜单列表区域 -->
+
   <div clss="menu-list">
     <ul :class="isFloat ? 'cus-menu' : 'cus-drawer-menu'">
       <!-- 菜单项 -->
@@ -29,16 +30,27 @@ export default {
   props: {
     /* 控制菜单列行和列的显示 */
     isFloat: {
-      type: Boolean
+      type: Boolean,
     },
-    parentActiveIndex: {
-      type: String
-    }
   },
   data() {
     return {
-      activeIndex: this.parentActiveIndex,
-    }
+      activeIndex: "1",
+    };
+  },
+  mounted() {
+    /* 监听路由切换 */
+    this.$bus.$on("tabMenu", (name) => {
+      if (name === "home") {
+        this.activeIndex = "1";
+      } else if (name === "cate") {
+        this.activeIndex = "2";
+      } else if (name === "tag") {
+        this.activeIndex = "3";
+      } else if (name === "") {
+        this.activeIndex = "4";
+      }
+    });
   },
   methods: {
     /* 选择当前按钮 */
@@ -58,7 +70,7 @@ export default {
           : "active-text"
         : "";
     },
-  }
+  },
 };
 </script>
 
