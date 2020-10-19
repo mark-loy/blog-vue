@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+
 Vue.use(VueRouter)
 
 /* 解决重复点击路由异常问题 */
@@ -12,12 +13,14 @@ VueRouter.prototype.push = function push(location) {
 const home = () => import('views/home/Home')
 const category = () => import('views/category/Category')
 const tag = () => import('views/tag/Tag')
+const timeLine = () => import('views/timeLine/TimeLine')
 
 const routes = [
   { path: '/', redirect: '/home', },
   { path: '/home', component: home, name: 'home' },
   { path: '/category', component: category, name: 'cate' },
-  { path: '/tag', component: tag, name: 'tag' }
+  { path: '/tag', component: tag, name: 'tag' },
+  { path: '/time', component: timeLine, name: 'time'}
 ]
 
 const router = new VueRouter({

@@ -16,7 +16,7 @@
         <i class="iconfont icon-biaoqian"></i>
         <span>标签</span>
       </li>
-      <li @click="activeSeleted('4', '')" :class="showClass('4')">
+      <li @click="activeSeleted('4', '/time')" :class="showClass('4')">
         <i class="iconfont icon-guidangxiangmu"></i>
         <span>归档</span>
       </li>
@@ -47,7 +47,7 @@ export default {
         this.activeIndex = "2";
       } else if (name === "tag") {
         this.activeIndex = "3";
-      } else if (name === "") {
+      } else if (name === "time") {
         this.activeIndex = "4";
       }
     });

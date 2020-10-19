@@ -17,7 +17,9 @@ import {
   Tag,
   Drawer,
   Divider,
-  Link
+  Link,
+  Timeline,
+  TimelineItem
 } from "element-ui"
 
 
@@ -38,6 +40,8 @@ Vue.use(Pagination)
 Vue.use(Tag)
 Vue.use(Divider)
 Vue.use(Link)
+Vue.use(Timeline)
+Vue.use(TimelineItem)
 
 Vue.prototype.$message = Message
 

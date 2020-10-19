@@ -1,4 +1,6 @@
-import { request } from 'plugins/network';
+import {
+  request
+} from 'plugins/network';
 
 export const mixin = {
   components: {

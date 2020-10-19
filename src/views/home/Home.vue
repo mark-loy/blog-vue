@@ -83,7 +83,7 @@ export default {
   methods: {
     /* 获取other数据源 */
     getOtherInfoData() {
-      // 发送请求
+      //发送请求
       request({
         method: "get",
         url: "/home/otherInfo",
