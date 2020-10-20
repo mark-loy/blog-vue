@@ -1,0 +1,72 @@
+@import './normalize.css';
+
+* {
+  border:none;
+  font-family: "微软雅黑", "黑体", "宋体", serif;
+  font-size:14px;
+  margin:0;
+  padding:0;
+  list-style: none;
+}
+
+html, body {
+  height: 100vh;
+  width: 100%;
+}
+
+
+
+.clear-fix::after {
+  clear: both;
+  content: '';
+  display: block;
+  width: 0;
+  height: 0;
+  visibility: hidden;
+}
+
+.clear-fix {
+  zoom: 1;
+}
+
+.el-header {
+  box-shadow:  0 1px 8px 0 rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  font-weight: 700;
+  font-size: 18px;
+  color: skyblue;
+}
+
+.total {
+  float: right;
+}
+
+.total-number {
+  font-weight: 700;
+  font-size: 20px;
+  color: #f2711c!important;
+}
+
+.el-card__body {
+  padding: 10px 10px !important;
+}
+
+.m-text {
+  font-weight: 300 !important;
+  letter-spacing: 1px !important;
+  line-height: 1.8 !important;
+}
+
+.el-pagination {
+  margin-top: 10px;
+}
+
+.card-up {
+  margin-bottom: 25px;
+}
+
+.el-tag {
+  cursor: pointer;
+}
