@@ -3,30 +3,16 @@ import {
 } from 'plugins/network';
 
 export const mixin = {
-<<<<<<< HEAD
-  components: {
-
-  },
-=======
->>>>>>> dev
   data() {
     return {
       /* 文章列表数据源 */
       articleList: [],
       /* 文章发表总数 */
-<<<<<<< HEAD
-      total: 0,
-      /* 分页条件 */
-      query: {
-        currentPage: 1,
-        offset: 5,
-=======
       total: -1,
       /* 分页条件 */
       query: {
         currentPage: 1,
-        offset: 8,
->>>>>>> dev
+        offset: 5,
         cate_id: '',
         tag_id: '',
         search: ''
@@ -37,8 +23,6 @@ export const mixin = {
     //请求文章列表数据源
     this.getArticleListData();
   },
-<<<<<<< HEAD
-=======
   mounted() {
     // 监听根据title查询文章事件
     this.$bus.$on('searchArticle', search => {
@@ -49,7 +33,6 @@ export const mixin = {
       this.getArticleListData();
     })
   },
->>>>>>> dev
   methods: {
     /* 获取文章列表数据源 */
     getArticleListData() {

@@ -19,6 +19,10 @@
         <i class="iconfont icon-shijian"></i>
         <span>时间线</span>
       </li>
+      <li @click="activeSeleted('5', '/message')" :class="showClass('5')">
+        <i class="iconfont icon-liuyan"></i>
+        <span>留言</span>
+      </li>
     </ul>
   </div>
 </template>

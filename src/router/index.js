@@ -15,6 +15,7 @@ const category = () => import('views/category/Category')
 const tag = () => import('views/tag/Tag')
 const timeLine = () => import('views/timeLine/TimeLine')
 const article = () => import('views/article/Article')
+const message = () => import('views/message/Message')
 
 const routes = [
   { path: '/', redirect: '/home', },
@@ -22,7 +23,8 @@ const routes = [
   { path: '/category', component: category, name: 'cate' },
   { path: '/tag', component: tag, name: 'tag' },
   { path: '/time', component: timeLine, name: 'time'},
-  { path: '/article/:id', component: article}
+  { path: '/article/:id', component: article},
+  { path: '/message', component: message},
 ]
 
 const router = new VueRouter({

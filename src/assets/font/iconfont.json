@@ -62,6 +62,13 @@
       "unicode_decimal": 58887
     },
     {
+      "icon_id": "1227534",
+      "name": "留言",
+      "font_class": "liuyan",
+      "unicode": "e638",
+      "unicode_decimal": 58936
+    },
+    {
       "icon_id": "1346241",
       "name": "归档项目",
       "font_class": "guidangxiangmu",
@@ -90,8 +97,6 @@
       "unicode_decimal": 58891
     },
     {
-<<<<<<< HEAD
-=======
       "icon_id": "1804707",
       "name": "火箭",
       "font_class": "icon-test",
@@ -99,7 +104,6 @@
       "unicode_decimal": 58931
     },
     {
->>>>>>> dev
       "icon_id": "2742562",
       "name": "首页",
       "font_class": "shouye",
@@ -107,8 +111,6 @@
       "unicode_decimal": 58971
     },
     {
-<<<<<<< HEAD
-=======
       "icon_id": "2742655",
       "name": "时间",
       "font_class": "shijian",
@@ -116,7 +118,6 @@
       "unicode_decimal": 58997
     },
     {
->>>>>>> dev
       "icon_id": "3283550",
       "name": "用户组",
       "font_class": "user-group",
@@ -126,17 +127,11 @@
     {
       "icon_id": "5321971",
       "name": "时间",
-<<<<<<< HEAD
-      "font_class": "shijian",
-=======
       "font_class": "shijian1",
->>>>>>> dev
       "unicode": "e681",
       "unicode_decimal": 59009
     },
     {
-<<<<<<< HEAD
-=======
       "icon_id": "6027488",
       "name": "点赞",
       "font_class": "dianzan",
@@ -144,7 +139,6 @@
       "unicode_decimal": 58881
     },
     {
->>>>>>> dev
       "icon_id": "6282754",
       "name": "密码 copy",
       "font_class": "mimacopy",

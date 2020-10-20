@@ -1,57 +1,62 @@
 <template>
   <div>
     <el-row type="flex" justify="center">
-      <el-col :xs="24" :sm="15" :md="14" :lg="13" :xl="12">
-        <el-card class="box-card">
-          <!-- 头部区域 -->
-          <div slot="header" class="clearfix">
-            <!-- 标题 -->
-            <h1 class="article-title">{{ articleData.title }}</h1>
-            <!-- 其他信息 -->
-            <ul class="ul-info">
-              <!-- 用户信息(可链接) -->
-              <li><i class="iconfont icon-yonghu"></i> {{ user.pet_name }}</li>
-              <!-- 创建时间 -->
-              <li>
-                <i class="iconfont icon-shijian"></i>
-                {{ articleData.gmtCreate | dateFormat("yyyy-MM-dd") }}
-              </li>
-              <!-- 浏览数量 -->
-              <li>
-                <i class="iconfont icon-browse"></i> {{ articleData.viewCount }}
-              </li>
-              <!-- 点赞数 -->
-              <li>
-                <i class="iconfont icon-dianzan"></i>
-                {{ articleData.likeCount }}
-              </li>
-              <!-- 分类信息（可链接） -->
-              <li>
-                <el-tag size="mini">
-                  <i class="iconfont icon-leimupinleifenleileibie2"></i>
-                  {{ cate.cate_name }}
-                </el-tag>
-              </li>
-            </ul>
-            <!-- 标签信息（可链接） -->
-            <ul class="tags-info">
-              <li v-for="tag in tags" :key="tag.id">
-                <el-tag size="mini">
-                  <i class="iconfont icon-biaoqian"></i>
-                  {{ tag.tag_name }}
-                </el-tag>
-              </li>
-            </ul>
-          </div>
-          <!-- 内容区域 -->
-          <div class="article-content">
-            {{ articleData.context }}
-          </div>
-        </el-card>
+      <el-col :xs="24" :sm="14" :md="13" :lg="11" :xl="10">
+        <!-- 头部区域 -->
+        <div>
+          <!-- 标题 -->
+          <h1 class="article-title">{{ articleData.title }}</h1>
+          <!-- 其他信息 -->
+          <ul class="ul-info">
+            <!-- 用户信息(可链接) -->
+            <li><i class="iconfont icon-yonghu"></i> {{ user.pet_name }}</li>
+            <!-- 创建时间 -->
+            <li>
+              <i class="iconfont icon-shijian"></i>
+              {{ articleData.gmtCreate | dateFormat("yyyy-MM-dd") }}
+            </li>
+            <!-- 浏览数量 -->
+            <li>
+              <i class="iconfont icon-browse"></i> {{ articleData.viewCount }}
+            </li>
+            <!-- 点赞数 -->
+            <li>
+              <i class="iconfont icon-dianzan"></i>
+              {{ articleData.likeCount }}
+            </li>
+            <!-- 分类信息（可链接） -->
+            <li>
+              <el-tag size="mini">
+                <i class="iconfont icon-leimupinleifenleileibie2"></i>
+                {{ cate.cate_name }}
+              </el-tag>
+            </li>
+          </ul>
+          <!-- 标签信息（可链接） -->
+          <ul class="tags-info">
+            <li v-for="tag in tags" :key="tag.id">
+              <el-tag size="mini">
+                <i class="iconfont icon-biaoqian"></i>
+                {{ tag.tag_name }}
+              </el-tag>
+            </li>
+          </ul>
+        </div>
+        <!-- 展示图 -->
+        <p class="show-img">
+          <img :src="articleData.showImg" alt="" />
+        </p>
+        <!-- 内容区域 -->
+        <div class="article-content">
+          {{ articleData.context }}
+        </div>
+
         <!-- 最后更新时间 -->
         <div class="last-update">
           <span class="descrip">Last Updated：</span>
-          <span class="last-time">{{ articleData.gmtModified | dateFormat('yyyy-MM-dd hh:mm:ss') }} </span>
+          <span class="last-time"
+            >{{ articleData.gmtModified | dateFormat("yyyy-MM-dd hh:mm:ss") }}
+          </span>
         </div>
       </el-col>
     </el-row>
@@ -97,17 +102,21 @@ export default {
 
 <style scoped>
 .article-title {
-  font-size: 21px;
+  font-size: 24px;
   font-weight: 500;
+  color: #242424;
 }
 
 .ul-info {
-  margin-bottom: 30px;
+  width: 100%;
+  height: 30px;
+  line-height: 20px;
 }
 
 .ul-info li {
   float: left;
-  margin-right: 18px;
+  padding: 4px 0;
+  margin-right: 14px;
   color: #7f7f7f;
 }
 
@@ -116,23 +125,25 @@ export default {
 }
 
 .tags-info {
-  padding: 14px 0;
+  width: 100%;
+  height: 40px;
+  line-height: 40px;
 }
 
 .tags-info li {
   margin-right: 15px;
   float: left;
 }
-.show-img  {
+.show-img {
+  margin-top: 30px;
   text-align: center;
 }
-.show-img img{
-  min-width: 90%;
-  max-width: 100%;
+.show-img img {
+  width: 100%;
 }
 
 .article-content {
-  margin: 15px 5px;
+  margin: 30px 5px;
 }
 
 .last-update {
