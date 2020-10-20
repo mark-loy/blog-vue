@@ -19,7 +19,8 @@ import {
   Divider,
   Link,
   Timeline,
-  TimelineItem
+  TimelineItem,
+  Backtop 
 } from "element-ui"
 
 
@@ -42,6 +43,7 @@ Vue.use(Divider)
 Vue.use(Link)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
+Vue.use(Backtop)
 
 Vue.prototype.$message = Message
 

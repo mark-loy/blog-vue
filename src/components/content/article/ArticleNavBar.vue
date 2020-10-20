@@ -49,13 +49,13 @@
 export default {
   props: {
     title: {
-      type: String,
+      type: String
     },
     type: {
-      type: String,
+      type: String
     },
     data: {
-      type: Array,
+      type: Array
     },
   },
   data() {

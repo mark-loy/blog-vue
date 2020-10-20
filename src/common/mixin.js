@@ -3,19 +3,30 @@ import {
 } from 'plugins/network';
 
 export const mixin = {
+<<<<<<< HEAD
   components: {
 
   },
+=======
+>>>>>>> dev
   data() {
     return {
       /* 文章列表数据源 */
       articleList: [],
       /* 文章发表总数 */
+<<<<<<< HEAD
       total: 0,
       /* 分页条件 */
       query: {
         currentPage: 1,
         offset: 5,
+=======
+      total: -1,
+      /* 分页条件 */
+      query: {
+        currentPage: 1,
+        offset: 8,
+>>>>>>> dev
         cate_id: '',
         tag_id: '',
         search: ''
@@ -26,6 +37,19 @@ export const mixin = {
     //请求文章列表数据源
     this.getArticleListData();
   },
+<<<<<<< HEAD
+=======
+  mounted() {
+    // 监听根据title查询文章事件
+    this.$bus.$on('searchArticle', search => {
+      console.log(search);
+      // 设置title值
+      this.query.search = search
+      // 刷新页面数据
+      this.getArticleListData();
+    })
+  },
+>>>>>>> dev
   methods: {
     /* 获取文章列表数据源 */
     getArticleListData() {

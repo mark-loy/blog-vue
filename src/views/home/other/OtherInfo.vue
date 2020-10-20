@@ -122,7 +122,7 @@ export default {
       this.$nextTick(() => { 
         setTimeout(() => { //
           this.$bus.$emit("tabNavBar", cateId);
-        }, 5);
+        }, 30);
       });
     },
     /* 路由跳转到标签页面 */
@@ -134,7 +134,7 @@ export default {
       this.$nextTick(() => {
         setTimeout(() => {
           this.$bus.$emit("tabNavBar", tagId);
-        }, 5);
+        }, 30);
       });
     },
   },

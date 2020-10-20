@@ -1,45 +1,58 @@
 <template>
   <div class="category">
     <!-- 引用文章导航组件 -->
-    <article-nav-bar
-      ref="articleNav"
-      @findArticleById="findArticleByCateId"
-      :data="cateData"
-      title="分类"
-      type="cate"
-    ></article-nav-bar>
+    <div v-if="Object.keys(articleList).length !== 0">
+      <article-nav-bar
+        ref="articleNav"
+        @findArticleById="findArticleByCateId"
+        :data="cateData"
+        title="分类"
+        type="cate"
+      ></article-nav-bar>
+    </div>
 
     <!-- 分类数据列表行 -->
+
     <el-row type="flex" justify="center">
       <el-col :xs="24" :sm="14" :md="12" :lg="12">
-        <el-card>
+        <!-- 查询到文章博客时 -->
+        <el-card v-if="Object.keys(articleList).length !== 0">
           <!-- 文章列表区域 -->
-          <articleCpn
-            v-for="article in articleList"
-            :key="article.id"
-            :info="article"
-          ></articleCpn>
+          <div>
+            <articleList
+              v-for="article in articleList"
+              :key="article.id"
+              :info="article"
+            ></articleList>
+          </div>
 
           <!-- 分页区域 -->
-          <el-pagination
-            background
-            layout="prev, pager, next"
-            @size-change="handleSizeChange"
-            @current-change="handleCurrentChange"
-            :current-page="query.currentPage"
-            :page-size="query.offset"
-            :total="total"
-          >
-          </el-pagination>
+          <div>
+            <el-pagination
+              background
+              layout="prev, pager, next"
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :current-page="query.currentPage"
+              :page-size="query.offset"
+              :total="total"
+            >
+            </el-pagination>
+          </div>
         </el-card>
+        <!-- 未找到文章博客时 -->
+        <div v-if="total === 0">
+          <notFound></notFound>
+        </div>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
-import articleCpn from "components/content/article/Article";
+import articleList from "components/content/article/ArticleList";
 import articleNavBar from "components/content/article/ArticleNavBar";
+import notFound from "components/common/404/NotFound";
 
 import { mixin } from "common/mixin";
 
@@ -47,8 +60,9 @@ import { request } from "plugins/network";
 
 export default {
   components: {
-    articleCpn,
+    articleList,
     articleNavBar,
+    notFound,
   },
   mixins: [mixin],
   data() {

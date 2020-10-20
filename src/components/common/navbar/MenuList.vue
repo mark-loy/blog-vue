@@ -1,6 +1,5 @@
 <template>
   <!-- 菜单列表区域 -->
-
   <div clss="menu-list">
     <ul :class="isFloat ? 'cus-menu' : 'cus-drawer-menu'">
       <!-- 菜单项 -->
@@ -17,8 +16,8 @@
         <span>标签</span>
       </li>
       <li @click="activeSeleted('4', '/time')" :class="showClass('4')">
-        <i class="iconfont icon-guidangxiangmu"></i>
-        <span>归档</span>
+        <i class="iconfont icon-shijian"></i>
+        <span>时间线</span>
       </li>
     </ul>
   </div>

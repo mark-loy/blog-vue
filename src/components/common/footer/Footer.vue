@@ -81,7 +81,7 @@ export default {};
 }
 
 .weixin img {
-  width: 120px;
+  width: 140px;
 }
 
 .link-way-col {

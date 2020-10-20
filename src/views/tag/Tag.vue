@@ -1,23 +1,26 @@
 <template>
   <div class="tag">
-    <!-- 引用文章导航组件 -->
-    <article-nav-bar
-      @findArticleById="findArticleByTagId"
-      :data="tagData"
-      title="标签"
-      type="tag"
-    ></article-nav-bar>
+    <!-- 引用导航组件 -->
+    <div v-if="Object.keys(articleList).length !== 0">
+      <article-nav-bar
+        @findArticleById="findArticleByTagId"
+        :data="tagData"
+        title="标签"
+        type="tag"
+      >
+      </article-nav-bar>
+    </div>
 
     <!-- 分类数据列表行 -->
     <el-row type="flex" justify="center">
       <el-col :xs="24" :sm="14" :md="12" :lg="12">
-        <el-card>
+        <el-card v-if="Object.keys(articleList).length !== 0">
           <!-- 文章列表区域 -->
-          <articleCpn
+          <articleList
             v-for="article in articleList"
             :key="article.id"
             :info="article"
-          ></articleCpn>
+          ></articleList>
 
           <!-- 分页区域 -->
           <el-pagination
@@ -31,14 +34,19 @@
           >
           </el-pagination>
         </el-card>
+        <!-- 未找到文章博客时 -->
+        <div v-if="total === 0">
+          <notFound></notFound>
+        </div>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
-import articleCpn from "components/content/article/Article";
+import articleList from "components/content/article/ArticleList";
 import articleNavBar from "components/content/article/ArticleNavBar";
+import notFound from "components/common/404/NotFound";
 
 import { request } from "plugins/network";
 
@@ -47,7 +55,8 @@ import { mixin } from "common/mixin";
 export default {
   components: {
     articleNavBar,
-    articleCpn,
+    articleList,
+    notFound,
   },
   mixins: [mixin],
   data() {

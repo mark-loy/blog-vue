@@ -1,7 +1,6 @@
 <template>
   <!-- 导航栏区域 -->
   <div class="navbar">
-    
     <el-row type="flex" justify="space-around" align="middle">
       <!-- logo列 -->
       <el-col :xs="3" :sm="4" :md="4" :lg="4" :xl="4">
@@ -9,19 +8,18 @@
       </el-col>
 
       <!-- 菜单列 -->
-      <el-col :xs="0" :sm="12" :md="12" :lg="12" :xl="12">
-        <menu-list
-          :isFloat="true"
-        ></menu-list>
+      <el-col :xs="0" :sm="13" :md="12" :lg="12" :xl="12">
+        <menu-list :isFloat="true"></menu-list>
       </el-col>
 
       <!-- 搜索列 -->
-      <el-col :xs="12" :sm="4" :md="4" :lg="4" :xl="4">
-        <el-input
-          placeholder="请输入内容"
-          prefix-icon="el-icon-search"
-          v-model="query"
-        >
+      <el-col :xs="12" :sm="6" :md="4" :lg="4" :xl="4">
+        <el-input placeholder="请输入内容" v-model="query" :clearable="true">
+          <el-button
+            @click="searchArticle"
+            slot="append"
+            icon="el-icon-search"
+          ></el-button>
         </el-input>
       </el-col>
 
@@ -35,10 +33,7 @@
 
     <!-- 抽屉区域：移动端菜单栏列表显示 -->
     <el-drawer :visible.sync="drawer" :with-header="false">
-      <menu-list
-        :isFloat="false"
-        @closedDrawer="closedDrawer"
-      ></menu-list>
+      <menu-list :isFloat="false" @closedDrawer="closedDrawer"></menu-list>
     </el-drawer>
   </div>
 </template>
@@ -68,6 +63,12 @@ export default {
     closedDrawer(index) {
       this.drawer = false;
       this.activeIndex = index;
+    },
+    /* 根据title搜索文章 */
+    searchArticle() {
+      // 通过事件总线，发射根据title查询文章事件
+        console.log('query=====' + this.query);
+        this.$bus.$emit("searchArticle", this.query);
     },
   },
 };
