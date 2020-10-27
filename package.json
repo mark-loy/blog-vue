@@ -8,8 +8,8 @@
   },
   "dependencies": {
     "axios": "^0.20.0",
-    "core-js": "^3.6.5",
     "element-ui": "^2.13.2",
+    "emoji-mart-vue": "^2.6.6",
     "nprogress": "^0.2.0",
     "path": "^0.12.7",
     "vue": "^2.6.11",

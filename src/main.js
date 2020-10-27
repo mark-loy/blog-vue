@@ -7,6 +7,7 @@ import './plugins/element'
 /* 导入公共js */
 import './common/util'
 
+
 Vue.config.productionTip = false
 
 //在vue原型上挂载事件总线

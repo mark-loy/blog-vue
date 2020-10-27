@@ -20,7 +20,10 @@ import {
   Link,
   Timeline,
   TimelineItem,
-  Backtop 
+  Backtop,
+  Dialog,
+  Loading,
+  Popover
 } from "element-ui"
 
 
@@ -44,6 +47,9 @@ Vue.use(Link)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
 Vue.use(Backtop)
+Vue.use(Dialog)
+Vue.use(Loading)
+Vue.use(Popover)
 
 Vue.prototype.$message = Message
 

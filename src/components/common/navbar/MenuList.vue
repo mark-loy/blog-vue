@@ -4,11 +4,11 @@
     <ul :class="isFloat ? 'cus-menu' : 'cus-drawer-menu'">
       <!-- 菜单项 -->
       <li @click="activeSeleted('1', '/home')" :class="showClass('1')">
-        <i class="iconfont icon-shouye"></i>
+        <i class="iconfont icon-faxian-copy"></i>
         <span>首页</span>
       </li>
       <li @click="activeSeleted('2', '/category')" :class="showClass('2')">
-        <i class="iconfont icon-leimupinleifenleileibie2"></i>
+        <i class="iconfont icon-fenlei"></i>
         <span>分类</span>
       </li>
       <li @click="activeSeleted('3', '/tag')" :class="showClass('3')">
@@ -16,7 +16,7 @@
         <span>标签</span>
       </li>
       <li @click="activeSeleted('4', '/time')" :class="showClass('4')">
-        <i class="iconfont icon-shijian"></i>
+        <i class="iconfont icon-shijian-xian"></i>
         <span>时间线</span>
       </li>
       <li @click="activeSeleted('5', '/message')" :class="showClass('5')">
@@ -41,17 +41,27 @@ export default {
       activeIndex: "1",
     };
   },
-  mounted() {
+  beforeCreate() {
     /* 监听路由切换 */
     this.$bus.$on("tabMenu", (name) => {
       if (name === "home") {
         this.activeIndex = "1";
-      } else if (name === "cate") {
+        window.sessionStorage.setItem("currentRouter", "/" + name)
+      } else if (name === "category") {
         this.activeIndex = "2";
+        window.sessionStorage.setItem("currentRouter", "/" + name)
       } else if (name === "tag") {
         this.activeIndex = "3";
+        window.sessionStorage.setItem("currentRouter", "/" + name)
       } else if (name === "time") {
         this.activeIndex = "4";
+        window.sessionStorage.setItem("currentRouter", "/" + name)
+      } else if (name === "message") {
+        this.activeIndex = "5";
+        window.sessionStorage.setItem("currentRouter", "/" + name)
+      } else if (name === 'article') {
+        this.activeIndex = "0";
+        window.sessionStorage.setItem("currentRouter", "/" + name)
       }
     });
   },
@@ -78,6 +88,10 @@ export default {
 </script>
 
 <style scoped>
+.menu-list {
+  width: 600px;
+}
+
 span {
   margin-left: 3px;
 }

@@ -2,7 +2,7 @@ import {
   request
 } from 'plugins/network';
 
-export const mixin = {
+export const articleMixin = {
   data() {
     return {
       /* 文章列表数据源 */
@@ -68,3 +68,4 @@ export const mixin = {
     },
   }
 }
+

@@ -2,7 +2,7 @@ import Vue from 'vue'
 
 /* 格式化时间 */
 Vue.filter('dateFormat', (str, fmt) => {
-  const date = new Date(str * 1000)
+  const date = new Date(str)
   if (/(y+)/.test(fmt)) {
     fmt = fmt.replace(RegExp.$1, (date.getFullYear() + '').substr(4 - RegExp.$1.length));
   }

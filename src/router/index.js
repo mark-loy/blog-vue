@@ -16,15 +16,17 @@ const tag = () => import('views/tag/Tag')
 const timeLine = () => import('views/timeLine/TimeLine')
 const article = () => import('views/article/Article')
 const message = () => import('views/message/Message')
+const login = () => import('components/common/login/Login')
 
 const routes = [
   { path: '/', redirect: '/home', },
   { path: '/home', component: home, name: 'home' },
-  { path: '/category', component: category, name: 'cate' },
+  { path: '/category', component: category, name: 'category' },
   { path: '/tag', component: tag, name: 'tag' },
   { path: '/time', component: timeLine, name: 'time'},
-  { path: '/article/:id', component: article},
-  { path: '/message', component: message},
+  { path: '/article/:id', component: article, name: 'article'},
+  { path: '/message', component: message, name: 'message'},
+  { path: '/login', component: login},
 ]
 
 const router = new VueRouter({
@@ -40,7 +42,7 @@ router.beforeEach((to, from, next) => {
 
 /* 后置导航守卫， */
 router.afterEach((to, from) => {
-  // 发射当前路由切换事件
+  // 发射要跳转的路由切换事件
   router.app.$bus.$emit('tabMenu', to.name)
 })
 

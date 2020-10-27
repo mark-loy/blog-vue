@@ -1,21 +1,27 @@
 <template>
   <!-- 导航栏区域 -->
   <div class="navbar">
-    <el-row class="navbar-row" :gutter="18" type="flex" justify="space-around" align="middle">
+    <el-row
+      class="navbar-row"
+      :gutter="18"
+      type="flex"
+      justify="space-around"
+      align="middle"
+    >
       <!-- logo列 -->
       <el-col :xs="1" :sm="6" :md="6" :lg="6" :xl="6">
         <h2 class="logo">Blog</h2>
       </el-col>
 
-      <el-col  :span="20">
+      <el-col :span="15">
         <el-row type="flex" align="middle">
           <!-- 菜单列 -->
-          <el-col class="menu-list" :xs="0" :span="11">
+          <el-col class="menu-list" :xs="0">
             <menu-list :isFloat="true"></menu-list>
           </el-col>
 
-          <!-- 搜索列 -->
-          <el-col class="button-input">
+          <!-- PC搜索列 -->
+          <el-col :xs="0" class="button-input">
             <el-input
               placeholder="请输入内容"
               v-model="query"
@@ -30,14 +36,41 @@
             </el-input>
           </el-col>
 
-          <!-- 折叠列 -->
+          <!-- 移动登录按钮 -->
           <el-col :xs="2" :sm="0">
+            <el-button
+              v-if="isShowLoginBtn"
+              type="primary"
+              @click="showLoginDialog"
+              size="mini"
+              >登录</el-button
+            >
+            <el-button v-else type="primary" @click="visitor_logout" size="mini"
+              >注销</el-button
+            >
+          </el-col>
+
+          <!-- 折叠列 -->
+          <el-col :xs="3" :sm="0">
             <span @click="showDrawer">
               <i class="iconfont icon-zhedie cus-icon"></i>
             </span>
           </el-col>
-
         </el-row>
+      </el-col>
+
+      <!-- PC登录按钮 -->
+      <el-col :xs="0" class="pc-login-btn">
+        <el-button
+          v-if="isShowLoginBtn"
+          type="primary"
+          @click="showLoginDialog"
+          size="mini"
+          >登录</el-button
+        >
+        <el-button v-else type="primary" @click="visitor_logout" size="mini"
+          >注销</el-button
+        >
       </el-col>
     </el-row>
 
@@ -45,6 +78,27 @@
     <el-drawer :visible.sync="drawer" :with-header="false">
       <menu-list :isFloat="false" @closedDrawer="closedDrawer"></menu-list>
     </el-drawer>
+
+    <!-- 点击登录按钮，弹出对话框-->
+    <el-dialog
+      title="登录方式"
+      :visible.sync="loginDialogVisible"
+      width="360px"
+    >
+      <ul class="login-dialog">
+        <li>
+          <el-link
+            :underline="false"
+            href="https://github.com/login/oauth/authorize?client_id=Iv1.ba5422c5eaed00e0&redirect_uri=http://localhost:8080/login&scope=user&state=fbc9b373-1375-11eb-a817-005056c00001"
+          >
+            <i class="iconfont icon-github"></i>
+          </el-link>
+        </li>
+        <li>
+          <i class="iconfont icon-qq"></i>
+        </li>
+      </ul>
+    </el-dialog>
   </div>
 </template>
 
@@ -62,7 +116,22 @@ export default {
       query: "",
       /* 控制抽屉显示、隐藏 */
       drawer: false,
+      /* 控制登录对话框显示、隐藏 */
+      loginDialogVisible: false,
+      /* 控制登录按钮的显示、隐藏 */
+      isShowLoginBtn: true,
     };
+  },
+  beforeCreate() {
+    this.$bus.$on("tabLoginBtn", () => {
+      // 隐藏登录按钮
+      this.isShowLoginBtn = false;
+    });
+  },
+  mounted() {
+    this.isShowLoginBtn = window.sessionStorage.getItem("visitor-token")
+      ? false
+      : true;
   },
   methods: {
     /* 显示抽屉 */
@@ -77,8 +146,18 @@ export default {
     /* 根据title搜索文章 */
     searchArticle() {
       // 通过事件总线，发射根据title查询文章事件
-      console.log("query=====" + this.query);
       this.$bus.$emit("searchArticle", this.query);
+    },
+    /* 显示登录对话框 */
+    showLoginDialog() {
+      this.loginDialogVisible = true;
+    },
+    /* 注销访客登录 */
+    visitor_logout() {
+      // 清空token
+      window.sessionStorage.setItem("visitor-token", "");
+      // 刷新window
+      location.reload();
     },
   },
 };
@@ -102,16 +181,41 @@ export default {
 }
 
 .menu-list {
-  width: 600px;
+  max-width: 580px;
+  min-width: 500px;
 }
 
 .button-input {
   max-width: 200px;
+  min-width: 170px;
 }
 
 .cus-icon {
   float: right;
   color: #fff;
   font-size: 17px;
+}
+
+.login-dialog {
+  display: flex;
+}
+
+.login-dialog li {
+  flex: 1;
+  text-align: center;
+}
+
+.login-dialog li i {
+  font-size: 45px;
+}
+
+.login-dialog li i:hover {
+  color: skyblue;
+  cursor: pointer;
+}
+
+.pc-login-btn {
+  min-width: 100px;
+  max-width: 120px;
 }
 </style>

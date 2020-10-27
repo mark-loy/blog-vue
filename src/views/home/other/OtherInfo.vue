@@ -26,7 +26,7 @@
     <div class="cate-info">
       <!-- icon标题 -->
       <p class="title-icon">
-        <i class="iconfont icon-leimupinleifenleileibie2"></i>
+        <i class="iconfont icon-fenlei"></i>
         分类
         <!-- 更多分类icon -->
         <a href="/category"><i class="el-icon-arrow-right more-icon"></i></a>
@@ -93,11 +93,11 @@
 </template>
 
 <script>
-import { mixin } from "common/mixin";
+import { articleMixin } from "common/mixin";
 
 export default {
   name: "OtherInfo",
-  mixins: [mixin],
+  mixins: [articleMixin],
   props: {
     otherInfo: {
       type: Object,

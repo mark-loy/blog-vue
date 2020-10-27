@@ -1,7 +1,7 @@
 <template>
   <div v-if="Object.keys(timeLineData).length !== 0">
     <el-row type="flex" justify="center">
-      <el-col :xs="24" :sm="14" :md="12" :lg="12">
+      <el-col :xs="24" :sm="10" :md="9" :lg="8">
         <!-- 时间线区域 -->
         <div class="timeline-box">
           <el-timeline v-for="(timeline, index) in timeLineData" :key="index">
@@ -43,7 +43,6 @@ export default {
         method: "get",
         url: "/timeLine",
       }).then((res) => {
-        console.log(res);
         // 错误消息提示
         if (res.code !== 200) return this.$message.error(res.msg);
         // 设置数据源

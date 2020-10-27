@@ -1,5 +1,24 @@
 <template>
   <div class="tag">
+    <!-- 移动端搜索行 -->
+    <el-row class="search-row" type="flex" justify="center" align="middle">
+      <!-- 移动搜索列 -->
+      <el-col :xs="24" :sm="0">
+        <el-input
+          placeholder="请输入内容"
+          v-model="title"
+          :clearable="true"
+          size="small"
+        >
+          <el-button
+            @click="searchArticle"
+            slot="append"
+            icon="el-icon-search"
+          ></el-button>
+        </el-input>
+      </el-col>
+    </el-row>
+
     <!-- 引用导航组件 -->
     <div v-if="Object.keys(articleList).length !== 0">
       <article-nav-bar
@@ -50,7 +69,7 @@ import notFound from "components/common/404/NotFound";
 
 import { request } from "plugins/network";
 
-import { mixin } from "common/mixin";
+import { articleMixin } from "common/mixin";
 
 export default {
   components: {
@@ -58,11 +77,13 @@ export default {
     articleList,
     notFound,
   },
-  mixins: [mixin],
+  mixins: [articleMixin],
   data() {
     return {
       /* 标签菜单数据源 */
       tagData: [],
+      /* title */
+      title: "",
     };
   },
   created() {
@@ -96,6 +117,13 @@ export default {
       // 设置查询的分类id
       this.query.tag_id = tagId;
       // 刷新列表数据
+      this.getArticleListData();
+    },
+    /* 根据title搜索文章 */
+    searchArticle() {
+      // 设置查询的title
+      this.query.search = this.title;
+      // 刷新文章列表
       this.getArticleListData();
     },
   },

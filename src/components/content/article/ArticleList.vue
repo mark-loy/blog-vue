@@ -17,7 +17,7 @@
         </span>
         <!-- 发表时间 -->
         <span>
-          <i class="iconfont icon-shijian"></i>
+          <i class="iconfont icon-shijian-xian"></i>
           {{ info.article.gmt_create | dateFormat("yyyy-MM-dd") }}
         </span>
         <!-- 浏览数 -->
@@ -27,7 +27,7 @@
         </span>
         <!-- 分类 -->
         <el-tag size="mini">
-          <i class="iconfont icon-leimupinleifenleileibie2"></i>
+          <i class="iconfont icon-fenlei"></i>
           {{ info.category.cate_name }}
         </el-tag>
       </p>

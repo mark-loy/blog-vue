@@ -1,6 +1,25 @@
 <template>
   <!-- 首页区域 -->
   <div class="home">
+    <!-- 移动端搜索行 -->
+    <el-row class="search-row" type="flex" justify="center" align="middle">
+      <!-- 移动搜索列 -->
+      <el-col :xs="24" :sm="0">
+        <el-input
+          placeholder="请输入内容"
+          v-model="title"
+          :clearable="true"
+          size="small"
+        >
+          <el-button
+            @click="searchArticle"
+            slot="append"
+            icon="el-icon-search"
+          ></el-button>
+        </el-input>
+      </el-col>
+    </el-row>
+
     <el-row :gutter="18" type="flex" justify="center">
       <!-- 列表列 -->
       <el-col :xs="24" :sm="14" :md="12" :lg="10">
@@ -77,21 +96,21 @@ import articleList from "components/content/article/ArticleList";
 import otherCpn from "./other/OtherInfo";
 import notFound from "components/common/404/NotFound";
 
+import { articleMixin } from "common/mixin";
 import { request } from "plugins/network";
-
-import { mixin } from "common/mixin";
-
 export default {
   components: {
     articleList,
     otherCpn,
     notFound,
   },
-  mixins: [mixin],
+  mixins: [articleMixin],
   data() {
     return {
       /* 其他信息数据源 */
       otherInfoData: {},
+      /* title */
+      title: "",
     };
   },
   created() {
@@ -113,6 +132,13 @@ export default {
         if (res.code !== 200) return this.$message.error(res.message);
         this.otherInfoData = res.data;
       });
+    },
+    /* 根据title搜索文章 */
+    searchArticle() {
+      // 设置查询的title
+      this.query.search = this.title;
+      // 刷新文章列表
+      this.getArticleListData();
     },
   },
 };

@@ -15,7 +15,6 @@ html, body {
 }
 
 
-
 .clear-fix::after {
   clear: both;
   content: '';
@@ -69,4 +68,21 @@ html, body {
 
 .el-tag {
   cursor: pointer;
+}
+
+.search-row {
+  margin-bottom: 20px;
+}
+
+.v-modal {
+  z-index: 10 !important;
+}
+
+.el-textarea__inner {
+  border: none !important;
+  background-color: transparent !important;
+}
+
+.click-color {
+  color: #66b1ff !important;
 }
