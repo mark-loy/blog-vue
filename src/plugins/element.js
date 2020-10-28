@@ -22,8 +22,14 @@ import {
   TimelineItem,
   Backtop,
   Dialog,
-  Loading,
-  Popover
+  Popover,
+  Aside,
+  Menu,
+  Submenu,
+  MenuItemGroup,
+  MenuItem,
+  Breadcrumb,
+  BreadcrumbItem
 } from "element-ui"
 
 
@@ -48,8 +54,14 @@ Vue.use(Timeline)
 Vue.use(TimelineItem)
 Vue.use(Backtop)
 Vue.use(Dialog)
-Vue.use(Loading)
 Vue.use(Popover)
+Vue.use(Aside)
+Vue.use(Menu)
+Vue.use(Submenu)
+Vue.use(MenuItemGroup)
+Vue.use(MenuItem)
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)
 
 Vue.prototype.$message = Message
 

@@ -14,7 +14,8 @@ module.exports = {
         "common": resolve("src/common"),
         "components": resolve("src/components"),
         "plugins": resolve("src/plugins"),
-        "views": resolve("src/views")
+        "views": resolve("src/views"),
+        "store": resolve("src/store")
       }
     }
   },

@@ -86,3 +86,11 @@ html, body {
 .click-color {
   color: #66b1ff !important;
 }
+
+.el-menu {
+  border-right: none !important;
+}
+
+.el-breadcrumb {
+  margin-bottom: 20px;
+}

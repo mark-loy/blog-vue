@@ -43,7 +43,7 @@ export default {
   },
   beforeCreate() {
     /* 监听路由切换 */
-    this.$bus.$on("tabMenu", (name) => {
+    this.$bus.$on("tabRouter", (name) => {
       if (name === "home") {
         this.activeIndex = "1";
         window.sessionStorage.setItem("currentRouter", "/" + name)
