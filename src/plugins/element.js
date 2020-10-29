@@ -29,7 +29,16 @@ import {
   MenuItemGroup,
   MenuItem,
   Breadcrumb,
-  BreadcrumbItem
+  BreadcrumbItem,
+  Table,
+  TableColumn,
+  Select,
+  Option,
+  Steps,
+  Step,
+  Tabs,
+  TabPane,
+  MessageBox
 } from "element-ui"
 
 
@@ -62,8 +71,17 @@ Vue.use(MenuItemGroup)
 Vue.use(MenuItem)
 Vue.use(Breadcrumb)
 Vue.use(BreadcrumbItem)
+Vue.use(Table)
+Vue.use(TableColumn)
+Vue.use(Select)
+Vue.use(Option)
+Vue.use(Steps)
+Vue.use(Step)
+Vue.use(Tabs)
+Vue.use(TabPane)
 
 Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm
 
 
 

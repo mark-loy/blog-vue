@@ -10,9 +10,11 @@
     "axios": "^0.20.0",
     "element-ui": "^2.13.2",
     "emoji-mart-vue": "^2.6.6",
+    "lodash": "^4.17.20",
     "nprogress": "^0.2.0",
     "path": "^0.12.7",
     "vue": "^2.6.11",
+    "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"
   },

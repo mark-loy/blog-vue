@@ -7,7 +7,7 @@
 
     <!-- 后台管理页显示 -->
     <div v-if="isShowBackAdmin">
-      <router-view/>
+      <router-view />
     </div>
 
     <!-- 前端布局容器 -->
@@ -66,10 +66,12 @@ export default {
       if (name === "adminLogin") {
         this.isShowBackLogin = true;
         this.isShowBackAdmin = false;
-      } 
-      if (name.indexOf("back") !== -1) {
-        this.isShowBackAdmin = true;
-        this.isShowBackLogin = false;
+      }
+      if (name !== undefined && name !== null) {
+        if (name.indexOf("back") !== -1) {
+          this.isShowBackAdmin = true;
+          this.isShowBackLogin = false;
+        }
       }
     });
   },

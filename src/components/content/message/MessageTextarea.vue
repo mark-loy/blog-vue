@@ -139,6 +139,7 @@ export default {
           content: this.content, // 留言内容
         },
       }).then((res) => {
+        console.log(res);
         if (res.code !== 200) return this.$message.eroor("留言失败");
         this.$message.success("留言成功");
         // 清空文本域

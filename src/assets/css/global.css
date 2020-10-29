@@ -94,3 +94,11 @@ html, body {
 .el-breadcrumb {
   margin-bottom: 20px;
 }
+
+.el-table {
+  margin: 18px 0;
+}
+
+.el-step__title {
+  font-size: 14px !important;
+}

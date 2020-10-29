@@ -50,7 +50,7 @@ export default {
   methods: {
     /* 路由到文章列表 */
     toArticle() {
-      this.$router.push("/back/articles");
+      this.$router.push("/back/article");
     },
     /* 侧边栏的折叠与展开 */
     collapseAside() {

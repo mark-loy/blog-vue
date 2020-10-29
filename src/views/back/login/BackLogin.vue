@@ -19,15 +19,22 @@
               label-width="70px"
             >
               <el-form-item label="用户名" prop="username">
-                <el-input v-model="loginForm.username" clearable prefix-icon="iconfont icon-yonghu1"></el-input>
+                <el-input
+                  v-model="loginForm.username"
+                  clearable
+                  prefix-icon="iconfont icon-yonghu1"
+                ></el-input>
               </el-form-item>
               <el-form-item label="密码" prop="password">
-                <el-input v-model="loginForm.password" type="password" clearable prefix-icon="iconfont icon-mima1"></el-input>
+                <el-input
+                  v-model="loginForm.password"
+                  type="password"
+                  clearable
+                  prefix-icon="iconfont icon-mima1"
+                ></el-input>
               </el-form-item>
               <el-form-item>
-                <el-button type="primary" @click="submitForm"
-                  >提交</el-button
-                >
+                <el-button type="primary" @click="submitForm">提交</el-button>
                 <el-button @click="resetForm">重置</el-button>
               </el-form-item>
             </el-form>
@@ -39,9 +46,9 @@
 </template>
 
 <script>
-import {request} from 'plugins/network'
+import { request } from "plugins/network";
 
-import {SAVE_ADMIN_USER} from 'store/mutation-type'
+import { SAVE_ADMIN_USER } from "store/mutation-type";
 
 export default {
   data() {
@@ -78,30 +85,32 @@ export default {
     /* 登录表单提交 */
     submitForm() {
       /* 表单验证 */
-      this.$refs['loginFormRef'].validate((valid) => {
+      this.$refs["loginFormRef"].validate((valid) => {
         if (valid) {
           //效验成功，发送后台登录请求
           request({
-            method: 'post',
-            url: '/login',
-            data: this.loginForm
-          }).then(res => {
+            method: "post",
+            url: "/login",
+            data: this.loginForm,
+          }).then((res) => {
             console.log(res);
             // 提示错误信息
-            if (res.code !== 200) return this.$message.error(res.message)
+            if (res.code !== 200) return this.$message.error(res.message);
+            // 提示登录成功
+            this.$message.success("登录成功");
             // 保存用户token
-            window.sessionStorage.setItem("admin-token", res.data.token)
+            window.sessionStorage.setItem("admin-token", res.data.token);
             // 将登录的用户放在store中
-            this.$store.commit(SAVE_ADMIN_USER, res.data.user)
+            this.$store.commit(SAVE_ADMIN_USER, res.data.user);
             // 跳转到后台首页
-            this.$router.replace('/back')
-          })
+            this.$router.replace("/back");
+          });
         }
       });
     },
     /* 登录表单重置 */
     resetForm() {
-      this.$refs['loginFormRef'].resetFields();
+      this.$refs["loginFormRef"].resetFields();
     },
   },
 };

@@ -24,6 +24,7 @@ const welcome = () => import('views/back/welcome/Welcome')
 const adminLogin = () => import('views/back/login/BackLogin')
 const backHome = () => import('views/back/BackHome')
 const backArticle = () => import('views/back/article/Article')
+const backAddArticle = () => import('views/back/article/AddArticle')
 
 const routes = [{
     path: '/',
@@ -74,7 +75,8 @@ const routes = [{
     name: 'back',
     children: [
       {path: '', component: welcome, name: 'backWelcome'},
-      {path: 'articles', component: backArticle, name: 'backArticle'}
+      {path: 'article', component: backArticle, name: 'backArticle'},
+      {path: 'article/add', component: backAddArticle, name: 'backAddArticle'},
     ]
   },
 
