@@ -31,7 +31,7 @@
     </div>
 
     <!-- 回到顶部 -->
-    <el-backtop :bottom="100" :right="50">
+    <el-backtop :bottom="100" :right="10">
       <div class="backtop">
         <i class="iconfont icon-icon-test" style="font-size: 38px"></i>
       </div>
@@ -43,6 +43,7 @@
 // 前台展示页面导航、footer组件
 import navbar from "../navbar/NavBar";
 import footerCpn from "../footer/Footer";
+
 
 // 后台组件
 import adminLogin from "views/back/login/BackLogin";
@@ -84,13 +85,14 @@ export default {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 100;
+  z-index: 2000;
 
   background-color: #696c6e;
   margin-bottom: 15px;
 }
 
 .el-main {
+  padding: 10px 0;
   min-height: 900px;
   margin-top: 64px;
 }
@@ -98,6 +100,10 @@ export default {
 .el-footer {
   margin-top: 20px;
   background-color: #696c6e;
+}
+
+.el-backtop {
+  z-index: 2000;
 }
 
 .backtop {

@@ -88,12 +88,10 @@
           <el-tab-pane name="2" label="正文">
             <el-form-item label="文章内容" prop="context">
               <!-- 文章内容添加区域 -->
-              <quill-editor
+              <mavon-editor
                 v-model="articleForm.context"
-                ref="myQuillEditor"
-                :options="editorOption"
-              >
-              </quill-editor>
+                style="min-height: 500px"
+              ></mavon-editor>
             </el-form-item>
 
             <!-- 提交添加文章表单 -->
@@ -110,7 +108,16 @@
 <script>
 import { adminRequest } from "plugins/network";
 
+import { categoryMixin, tagMixin } from "common/mixin";
+
+/* 导入富文本编辑器 */
+import { mavonEditor } from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+
 export default {
+  components: {
+    mavonEditor
+  },
   data() {
     return {
       /* 添加文章表单 */
@@ -121,26 +128,25 @@ export default {
         description: [
           { required: true, message: "请输入描述", trigger: "blur" },
         ],
-        categoryId: [{ required: true, message: "请选择分类", trigger: "blur" }],
+        categoryId: [
+          { required: true, message: "请选择分类", trigger: "blur" },
+        ],
         tags: [{ required: true, message: "请选择标签", trigger: "blur" }],
-        context: [{ required: true, message: "请输入文章内容", trigger: "blur" }],
+        context: [
+          { required: true, message: "请输入文章内容", trigger: "blur" },
+        ],
       },
       /* 控制步骤条与标签页的同步切换 */
       currentActive: 0,
-      /* 分类数据源 */
-      categoryData: [],
-      /* 标签数据源 */
-      tagsData: [],
-      /* editor的参数设置 */
-      editorOption: {
-        placeholder: "文章内容",
+      /* mavon-editor编辑器设置 */
+      markdownOption: {
+        bold: true, // 粗体
+        italic: true, // 斜体
+        header: true, // 标题
       },
     };
   },
-  created() {
-    this.getCategoryData();
-    this.getTagData();
-  },
+  mixins: [categoryMixin, tagMixin],
   methods: {
     /* 提交文章 */
     addArticle() {
@@ -171,25 +177,6 @@ export default {
         }
       });
     },
-    /* 获取分类数据 */
-    getCategoryData() {
-      adminRequest({
-        method: "get",
-        url: "/back/category",
-      }).then((res) => {
-        this.categoryData = res.data.category;
-      });
-    },
-    /* 获取标签数据 */
-    getTagData() {
-      adminRequest({
-        method: "get",
-        url: "/back/tags",
-      }).then((res) => {
-        console.log(res);
-        this.tagsData = res.data.tags;
-      });
-    },
     /* 标签页切换时，回调事件 */
     tabs_click(activeName, oldActiveName) {
       // 判断基本信息是否填写完整
@@ -212,6 +199,11 @@ export default {
           return false;
         }
       }
+    },
+    // 所有操作都会被解析重新渲染
+    change(value, render) {
+      // render 为 markdown 解析后的结果(转化成了HTML格式）
+      this.articleForm.context = render;
     },
   },
 };

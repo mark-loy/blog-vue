@@ -30,4 +30,5 @@ export default {
 @import "assets/css/global.css";
 /* 引入字体文件 */
 @import "assets/font/iconfont.css";
+
 </style>

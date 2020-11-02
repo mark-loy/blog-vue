@@ -203,6 +203,7 @@ export default {
 .login-dialog li {
   flex: 1;
   text-align: center;
+  list-style: none;
 }
 
 .login-dialog li i {

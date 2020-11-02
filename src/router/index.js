@@ -25,7 +25,8 @@ const adminLogin = () => import('views/back/login/BackLogin')
 const backHome = () => import('views/back/BackHome')
 const backArticle = () => import('views/back/article/Article')
 const backAddArticle = () => import('views/back/article/AddArticle')
-
+const backCategory = () => import('views/back/category/Category')
+const backTag = () => import('views/back/tag/Tag')
 const routes = [{
     path: '/',
     redirect: '/home',
@@ -73,10 +74,31 @@ const routes = [{
     path: '/back',
     component: backHome,
     name: 'back',
-    children: [
-      {path: '', component: welcome, name: 'backWelcome'},
-      {path: 'article', component: backArticle, name: 'backArticle'},
-      {path: 'article/add', component: backAddArticle, name: 'backAddArticle'},
+    children: [{
+        path: '',
+        component: welcome,
+        name: 'backWelcome'
+      },
+      {
+        path: 'article',
+        component: backArticle,
+        name: 'backArticle'
+      },
+      {
+        path: 'article/add',
+        component: backAddArticle,
+        name: 'backAddArticle'
+      },
+      {
+        path: 'category',
+        component: backCategory,
+        name: 'backCategory'
+      },
+      {
+        path: 'tag',
+        component: backTag,
+        name: 'backTag'
+      },
     ]
   },
 
@@ -104,7 +126,6 @@ router.beforeEach((to, from, next) => {
 /* 后置导航守卫， */
 router.afterEach((to, from) => {
   // 发射要跳转的路由切换事件
-  console.log(to);
   router.app.$bus.$emit('tabRouter', to.name)
 })
 

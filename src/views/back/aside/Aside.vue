@@ -1,10 +1,9 @@
 <template>
   <div>
     <!-- 控制侧边栏折叠 -->
-    <div @click="collapseAside" :class="['collapse']" >|||</div>
+    <div @click="collapseAside" :class="['collapse']">|||</div>
 
     <el-menu
-      
       background-color="#696c6e"
       text-color="#fff"
       active-text-color="#409eff"
@@ -35,6 +34,26 @@
           >文章列表</el-menu-item
         >
       </el-submenu>
+      <el-submenu index="3">
+        <template slot="title">
+          <i class="iconfont icon-fenlei"></i>
+          <span>分类管理</span>
+        </template>
+        <el-menu-item @click="toCategory">
+          <i class="iconfont icon-leimupinleifenleileibie2"></i
+          >分类列表</el-menu-item
+        >
+      </el-submenu>
+      <el-submenu index="4">
+        <template slot="title">
+          <i class="iconfont icon-biaoqian"></i>
+          <span>标签管理</span>
+        </template>
+        <el-menu-item @click="toTag">
+          <i class="iconfont icon-leimupinleifenleileibie2"></i
+          >标签列表</el-menu-item
+        >
+      </el-submenu>
     </el-menu>
   </div>
 </template>
@@ -44,7 +63,7 @@ export default {
   data() {
     return {
       /* 控制侧边栏是否折叠 */
-      isCollapse: false
+      isCollapse: false,
     };
   },
   methods: {
@@ -52,13 +71,19 @@ export default {
     toArticle() {
       this.$router.push("/back/article");
     },
+    toCategory() {
+      this.$router.push("/back/category");
+    },
+    toTag() {
+      this.$router.push("/back/tag");
+    },
     /* 侧边栏的折叠与展开 */
     collapseAside() {
       /* 设置是否折叠 */
-      this.isCollapse = !this.isCollapse
+      this.isCollapse = !this.isCollapse;
       // 通知父组件，改变其width
-      this.$emit('asideCollapse', this.isCollapse )
-    }
+      this.$emit("asideCollapse", this.isCollapse);
+    },
   },
 };
 </script>
@@ -75,7 +100,4 @@ i {
   color: #fff;
   cursor: pointer;
 }
-
-
-
 </style>

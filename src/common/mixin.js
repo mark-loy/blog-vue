@@ -1,5 +1,6 @@
 import {
-  request
+  request,
+  adminRequest
 } from 'plugins/network';
 
 export const articleMixin = {
@@ -69,3 +70,48 @@ export const articleMixin = {
   }
 }
 
+export const categoryMixin = {
+  data() {
+    return {
+      /* 分类数据源 */
+      categoryData: []
+    }
+  },
+  created() {
+    this.getCategoryData()
+  },
+  methods: {
+    /* 获取分类数据 */
+    getCategoryData() {
+      adminRequest({
+        method: "get",
+        url: "/back/category",
+      }).then((res) => {
+        this.categoryData = res.data.category;
+      });
+    },
+  }
+}
+
+export const tagMixin = {
+  data() {
+    return {
+      /* 标签数据源 */
+      tagsData: [],
+    }
+  },
+  created() {
+    this.getTagData()
+  },
+  methods: {
+    /* 获取标签数据 */
+    getTagData() {
+      adminRequest({
+        method: "get",
+        url: "/back/tags",
+      }).then((res) => {
+        this.tagsData = res.data.tags;
+      });
+    },
+  }
+}

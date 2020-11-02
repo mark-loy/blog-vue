@@ -58,7 +58,7 @@ export default {
           // 提示错误信息
           if (res.status !== 200) {
             // 跳转到/home
-            this.$router.push(router);
+            this.$router.replace(router);
             this.$message.error("获取用户信息失败，请重试");
             return false;
           }
@@ -72,7 +72,7 @@ export default {
           // 发送数据请求，保存用户信息
           return request({
             method: "post",
-            url: "/save_github_user",
+            url: "/save/github/user",
             data: this.githubUser,
           });
         })
@@ -81,14 +81,14 @@ export default {
           // 提示错误信息
           if (res.code !== 200) {
             // 跳转到/home
-            this.$router.push(router);
+            this.$router.replace(router);
             return this.$message.error("登录失败，请重试");
           }
           // 设置token
           window.sessionStorage.setItem("visitor-token", res.data.token);
           window.sessionStorage.setItem("visitor-id", res.data.visitor_id);
           // 跳转到/home
-          this.$router.push(router);
+          this.$router.replace(router);
           // 关闭loading, 关闭遮罩层
           this.$nextTick(() => {
             loadingInstance.close();
@@ -97,6 +97,7 @@ export default {
           });
         })
         .catch((err) => {
+          this.$router.replace(router);
           return this.$message.error("登录失败，请重试");
         });
     },

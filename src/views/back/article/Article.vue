@@ -59,7 +59,7 @@
             {{ scope.row.article.gmt_create | dateFormat("yyyy-MM-dd hh:ss") }}
           </template>
         </el-table-column>
-        <el-table-column label="操作">
+        <el-table-column label="操作" width="150">
           <template slot-scope="scope">
             <el-button
               @click="updateDialog(scope.row)"
@@ -152,12 +152,10 @@
         <el-form-item label="展示图" prop="title"> </el-form-item>
         <el-form-item label="正文" prop="title">
           <!-- 文章内容添加区域 -->
-          <quill-editor
+          <mavon-editor
             v-model="articleForm.context"
-            ref="myQuillEditor"
-            :options="editorOption"
-          >
-          </quill-editor>
+            style="min-height: 500px"
+          ></mavon-editor>
         </el-form-item>
       </el-form>
 
@@ -177,15 +175,24 @@
 <script>
 import { adminRequest } from "plugins/network";
 
+import { categoryMixin, tagMixin } from "common/mixin";
+
+/* 导入富文本编辑器 */
+import { mavonEditor } from "mavon-editor";
+import "mavon-editor/dist/css/index.css";
+
 export default {
+  components: {
+    mavonEditor,
+  },
   data() {
     return {
       /* 文章列表数据源 */
       articleData: [],
       /* 文章列表查询条件 */
       query: {
-        currentPage: "1",
-        offset: "5",
+        currentPage: 1,
+        offset: 5,
         search: "",
       },
       /* 文章列表总数 */
@@ -196,16 +203,13 @@ export default {
       articleForm: {},
       /* 修改文章表单验证 */
       articleRules: {},
-      /* 分类数据源 */
-      categoryData: [],
-      /* 标签数据源 */
-      tagsData: [],
       /* editor属性设置 */
       editorOption: {
         placeholder: "文章内容",
       },
     };
   },
+  mixins: [categoryMixin, tagMixin],
   created() {
     // 调用文章列表数据
     this.getArticleData();
@@ -279,25 +283,6 @@ export default {
           });
         })
         .catch(() => {});
-    },
-    /* 获取分类数据 */
-    getCategoryData() {
-      adminRequest({
-        method: "get",
-        url: "/back/category",
-      }).then((res) => {
-        this.categoryData = res.data.category;
-      });
-    },
-    /* 获取标签数据 */
-    getTagData() {
-      adminRequest({
-        method: "get",
-        url: "/back/tags",
-      }).then((res) => {
-        console.log(res);
-        this.tagsData = res.data.tags;
-      });
     },
     /* 保存修改文章的数据 */
     updateArticle() {},

@@ -35,6 +35,7 @@
                     :showSearch="false"
                     :showPreview="false"
                     :showCategories="false"
+                    placeholder="请输入正文"
                   />
                   <i
                     title="表情"
@@ -178,6 +179,7 @@ export default {
 .select-btn li {
   float: left;
   margin: 0 6px;
+  list-style: none;
 }
 
 .select-btn li i {

@@ -103,6 +103,7 @@ span {
   border-radius: 5px;
   color: rgba(255, 255, 255, 0.7);
   font-weight: 700;
+  list-style: none;
 }
 
 .cus-menu li:hover {

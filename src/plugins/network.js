@@ -7,7 +7,7 @@ import 'nprogress/nprogress.css'
 export function request(config) {
   // 1.创建axios的实例
   const instance = axios.create({
-    baseURL: 'http://localhost:8888/',
+    baseURL: 'http://192.168.1.4:8888/',
     timeout: 5000
   })
 
@@ -41,7 +41,7 @@ export function request(config) {
 export function adminRequest(config) {
   // 1.创建axios的实例
   const instance = axios.create({
-    baseURL: 'http://localhost:8888/',
+    baseURL: 'http://192.168.1.4:8888/',
     timeout: 5000
   })
 
