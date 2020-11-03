@@ -61,9 +61,14 @@
           ></mavon-editor>
         </div>
 
-        <!-- 点赞按钮 -->
+        <!-- 点赞区域 -->
         <div class="article-dianzan">
-          <el-button type="primary">
+          <!-- 点赞按钮 -->
+          <el-button v-if="isGivelike" @click="giveLike(1)">
+            <i class="iconfont icon-dianzan" style="font-size: 20px"></i>
+          </el-button>
+          <!-- 取消点赞按钮 -->
+          <el-button v-else @click="giveLike(0)" type="primary">
             <i class="iconfont icon-dianzan" style="font-size: 20px"></i>
           </el-button>
         </div>
@@ -100,7 +105,7 @@ import { mavonEditor } from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
 
 /* 目录生成css */
-import * as tocbot from "tocbot";
+import tocbot from "tocbot";
 
 export default {
   components: {
@@ -112,11 +117,15 @@ export default {
       user: {},
       cate: {},
       tags: [],
+      /* 控制点赞按钮的显示、隐藏 */
+      isGivelike: true,
     };
   },
   created() {
     // 获取文章详情数据源
     this.getArticleDetail(this.$route.params.id);
+    // 获取文章是否点赞
+    this.getIsLike(this.$route.params.id);
   },
   mounted() {
     setTimeout(() => {
@@ -144,6 +153,54 @@ export default {
         this.cate = res.data.cate;
         this.tags = res.data.tags;
       });
+    },
+    /* 获取文章是否点赞 */
+    getIsLike(articleId) {
+      // 获取访客id
+      const visitor_id = window.sessionStorage.getItem("visitor-id");
+      // 判断访客是否存在
+      if (visitor_id !== null && visitor_id !== "") {
+        // 访客存在则发送请求
+        request({
+          method: "get",
+          url: "/home/like/article",
+          params: {
+            visitorId: visitor_id,
+            articleId: articleId,
+          },
+        }).then((res) => {
+    
+          if (res.code !== 200) return this.$message.error(res.message);
+          this.isGivelike = res.data.isLike === 1 ? false : true;
+        });
+      }
+    },
+    /* 访客点赞or取消点赞 */
+    giveLike(type) {
+      // 获取访客id
+      const visitor_id = window.sessionStorage.getItem("visitor-id");
+      // 判断访客是否存在
+      if (visitor_id !== null && visitor_id !== "") {
+        // 文章id
+        const articleId = this.$route.params.id
+        request({
+          method: "put",
+          url: "/home/like/article",
+          data: {
+            type: type,
+            visitorId: visitor_id,
+            articleId: articleId,
+          },
+        }).then(res => {
+          if (res.code !== 200) return this.$message.error(res.message)
+          // 重新获取文章是否已点赞
+          this.getIsLike(articleId)
+          // 刷新页面数据
+          this.getArticleDetail(articleId)
+        });
+      } else {
+        this.$message.error("登录后点赞");
+      }
     },
     /* 给自动生成目录的h标签，添加id */
     addMao() {

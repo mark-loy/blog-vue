@@ -16,7 +16,7 @@ export function request(config) {
   instance.interceptors.request.use(config => {
     nprogress.start()
     const visitor_token = window.sessionStorage.getItem("visitor-token")
-    if (visitor_token !== null || visitor_token !== "") {
+    if (visitor_token !== null && visitor_token !== "") {
       config.headers["Authorization"] = visitor_token
     }
     return config

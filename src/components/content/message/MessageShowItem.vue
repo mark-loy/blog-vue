@@ -10,7 +10,7 @@
     ></el-avatar>
 
     <!-- 右侧用户名、留言内容等信息 -->
-    <div :class=" isShowPC ? 'message-body' : 'app-message-body'">
+    <div :class="isShowPC ? 'message-body' : 'app-message-body'">
       <!-- 用户名等 -->
       <div class="visitor-box">
         <span class="visitor-name"> {{ message.visitor.visitor_name }} </span>
@@ -31,14 +31,14 @@
           >回复</el-button
         >
       </div>
-
       <!-- 留言编辑 -->
       <div class="messageTextarea" v-show="isMessageTextarea">
         <MessageTextarea
           :row="4"
           :height="150"
           :type="2"
-          :parentId="message.message.id"
+          :parentId="messageId"
+          :messageName="message.visitor.visitor_name"
           @displayMessage="showMessageTextarea"
         >
         </MessageTextarea>
@@ -67,12 +67,20 @@ export default {
     /* 控制PC、移动端显示 */
     isShowPC: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
+    /* 留言父级id */
+    messageId: {
+      type: Number,
+    },
+    /* 父级留言人名称 */
+    messageName: {
+      type: String,
+    },
   },
   data() {
     return {
-      isMessageTextarea: false
+      isMessageTextarea: false,
     };
   },
   computed: {
@@ -84,7 +92,7 @@ export default {
   },
   methods: {
     showMessageTextarea() {
-      this.isMessageTextarea = !this.isMessageTextarea
+      this.isMessageTextarea = !this.isMessageTextarea;
     },
   },
 };

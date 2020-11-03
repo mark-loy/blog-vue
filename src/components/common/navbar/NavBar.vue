@@ -156,6 +156,7 @@ export default {
     visitor_logout() {
       // 清空token
       window.sessionStorage.setItem("visitor-token", "");
+      window.sessionStorage.setItem("visitor-id", "");
       // 刷新window
       location.reload();
     },

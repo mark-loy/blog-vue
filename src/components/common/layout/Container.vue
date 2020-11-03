@@ -92,7 +92,7 @@ export default {
 }
 
 .el-main {
-  padding: 10px 0;
+  padding: 10px 10px;
   min-height: 900px;
   margin-top: 64px;
 }

@@ -111,3 +111,7 @@ pre {
 .js-toc-content {
   padding: 8px 15px 15px 15px !important;
 }
+
+.v-note-wrapper {
+  z-index: 99 !important;
+}

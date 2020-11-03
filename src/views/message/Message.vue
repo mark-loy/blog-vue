@@ -6,7 +6,7 @@
     <!-- 引用留言展示组件 -->
     <MessageShow :messages="messages" :total="total"> </MessageShow>
     <!-- 加载更多 -->
-    <p v-if="messages.length > 0" class="loading-more">
+    <p v-if="total >= query.offset" class="loading-more">
       <el-button @click="messageLoding" :disabled="isLoadingMore" size="mini"
         >加载更多...</el-button
       >
@@ -34,7 +34,7 @@ export default {
       /* 留言分页条件 */
       query: {
         currentPage: 1, // 当前页
-        offset: 2, // 一级留言数
+        offset: 10, // 一级留言数
       },
       /* 控制加载更多按钮禁用 */
       isLoadingMore: false,
@@ -60,7 +60,6 @@ export default {
           offset: this.query.offset,
         },
       }).then((res) => {
-        console.log(res);
         // 请求失败，提示信息
         if (res.code !== 200) return this.$message.error("获取留言信息失败");
         // 判断数据加载的方式

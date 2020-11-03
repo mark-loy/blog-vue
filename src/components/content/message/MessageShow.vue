@@ -14,19 +14,18 @@
           <!-- 留言信息 -->
           <div
             v-for="message in messages"
-            :key="message.id"
+            :key="message.message.id"
             class="message-info clear-fix"
           >
             <!-- 一级留言 -->
-            <MessageShowItem :message="message"> </MessageShowItem>
-
+            <MessageShowItem :message="message" :messageId="message.message.id" > </MessageShowItem>
             <div
               v-for="childMessage in message.child_messages"
               :key="childMessage.id"
               class="child-message-info clear-fix"
             >
               <!-- 二级留言 -->
-              <MessageShowItem :message="childMessage" > </MessageShowItem>
+              <MessageShowItem :message="childMessage" :messageId="message.message.id" > </MessageShowItem>
             </div>
           </div>
         </div>
@@ -42,11 +41,11 @@
           <!-- 留言信息 -->
           <div
             v-for="message in messages"
-            :key="message.id"
+            :key="message.message.id"
             class="message-info clear-fix"
           >
             <!-- 一级留言 -->
-            <MessageShowItem :message="message" :isShowPC="false"> </MessageShowItem>
+            <MessageShowItem :message="message" :isShowPC="false" :messageId="message.message.id"> </MessageShowItem>
 
             <div
               v-for="childMessage in message.child_messages"
@@ -54,7 +53,7 @@
               class="child-message-info clear-fix"
             >
               <!-- 二级留言 -->
-              <MessageShowItem :message="childMessage" :isShowPC="false"> </MessageShowItem>
+              <MessageShowItem :message="childMessage" :messageId="message.message.id" :isShowPC="false"> </MessageShowItem>
             </div>
           </div>
         </div>

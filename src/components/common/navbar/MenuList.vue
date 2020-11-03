@@ -61,7 +61,7 @@ export default {
         window.sessionStorage.setItem("currentRouter", "/" + name)
       } else if (name === 'article') {
         this.activeIndex = "0";
-        window.sessionStorage.setItem("currentRouter", "/" + name)
+        window.sessionStorage.setItem("currentRouter", "/" + name + "/" + this.$route.params.id)
       }
     });
   },

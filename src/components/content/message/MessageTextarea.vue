@@ -12,7 +12,7 @@
             show-word-limit
             type="textarea"
             v-model="content"
-            placeholder="请输入内容"
+            :placeholder="textPlaceholder"
             :clearable="true"
             :rows="row"
             resize="none"
@@ -35,7 +35,6 @@
                     :showSearch="false"
                     :showPreview="false"
                     :showCategories="false"
-                    placeholder="请输入正文"
                   />
                   <i
                     title="表情"
@@ -92,6 +91,10 @@ export default {
       type: Number,
       default: 0,
     },
+    /* 父级留言人名称 */
+    messageName: {
+      type: String
+    }
   },
   data() {
     return {
@@ -102,6 +105,11 @@ export default {
       /* 控制选择表情后，隐藏界面 */
       isShowPicker: false,
     };
+  },
+  computed: {
+    textPlaceholder() {
+      return  this.messageName === undefined ? '请写下留言' : '@'+this.messageName
+    }
   },
   methods: {
     /* 切换表情按钮颜色 */
@@ -129,6 +137,9 @@ export default {
         return this.$message.error("登录后留言！");
       }
       const visitorId = window.sessionStorage.getItem("visitor-id");
+      // 拼接留言内容
+      const contentPer = this.messageName === undefined ? '' : '@'+this.messageName + ' '
+
       // 发送数据请求，添加留言
       request({
         method: "post",
@@ -137,7 +148,7 @@ export default {
           parentId: parentId, // 留言父级id
           type: type, // 一级留言
           visitorId: visitorId, //留言访客id
-          content: this.content, // 留言内容
+          content: contentPer + this.content, // 留言内容
         },
       }).then((res) => {
         console.log(res);
