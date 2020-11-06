@@ -6,8 +6,6 @@
       <h2 @click="toArticleDetail(info.article.id)">
         {{ info.article.title }}
       </h2>
-      <!-- 描述信息 -->
-      <p class="decription m-text">{{ info.article.description }}</p>
       <!-- 其他信息 -->
       <p class="other-info">
         <!-- 头像 用户名 -->

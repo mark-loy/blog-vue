@@ -27,6 +27,7 @@ const backArticle = () => import('views/back/article/Article')
 const backAddArticle = () => import('views/back/article/AddArticle')
 const backCategory = () => import('views/back/category/Category')
 const backTag = () => import('views/back/tag/Tag')
+const backVisitor = () => import('views/back/user/Visitor')
 const routes = [{
     path: '/',
     redirect: '/home',
@@ -98,6 +99,11 @@ const routes = [{
         path: 'tag',
         component: backTag,
         name: 'backTag'
+      },
+      {
+        path: 'visitor',
+        component: backVisitor,
+        name: 'backVisitor'
       },
     ]
   },

@@ -112,6 +112,18 @@ pre {
   padding: 8px 15px 15px 15px !important;
 }
 
-.v-note-wrapper {
-  z-index: 99 !important;
+.message-content .v-note-wrapper {
+  position: relative;
+  top: 10px;
+  min-height: 20px !important;
+  min-width: 248px !important;
+  z-index: 1 !important;
+}
+
+.v-show-content {
+  padding: 10px 10px !important;
+}
+
+.v-show-content p {
+  margin: 0 !important;
 }

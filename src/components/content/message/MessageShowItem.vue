@@ -44,20 +44,34 @@
         </MessageTextarea>
       </div>
 
+    </div>
+    
       <!-- 留言内容信息 -->
       <div class="message-content">
-        <div>{{ message.message.content }}</div>
+        <mavon-editor
+          v-model="message.message.content"
+          :subfield="false"
+          defaultOpen="preview"
+          :toolbarsFlag="false"
+          :editable="false"
+          :scrollStyle="true"
+          codeStyle="gruvbox-dark"
+        ></mavon-editor>
       </div>
-    </div>
   </div>
 </template>
 
 <script>
 import MessageTextarea from "./MessageTextarea";
 
+/* 导入富文本编辑器 */
+import { mavonEditor } from "mavon-editor";
+import "mavon-editor/dist/css/index.css";
+
 export default {
   components: {
     MessageTextarea,
+    mavonEditor,
   },
   props: {
     /* 留言数据源 */
@@ -106,7 +120,14 @@ export default {
 
 .message-body {
   float: left;
-  width: 90%;
+  width: 88%;
+  display: block;
+}
+
+/* 移动端显示 */
+.app-message-body {
+  float: left;
+  width: 82%;
   display: block;
 }
 
@@ -150,18 +171,10 @@ export default {
 .message-content {
   margin-bottom: 10px;
   margin-top: 20px;
-  background: rgba(27, 31, 35, 0.05);
+  margin-left: 50px;
   border-radius: 5px;
 }
 
-.message-content div {
-  padding: 12px;
-}
 
-/* 移动端显示 */
-.app-message-body {
-  float: left;
-  width: 83%;
-  display: block;
-}
+
 </style>

@@ -16,11 +16,6 @@
       <el-table :data="articleData" stripe style="width: 100%">
         <el-table-column type="index" label="#"></el-table-column>
         <el-table-column prop="article.title" label="标题"></el-table-column>
-        <el-table-column
-          prop="article.description"
-          label="描述"
-          width="300"
-        ></el-table-column>
         <el-table-column width="100" label="分类">
           <template slot-scope="scope">
             <el-tag size="mini">
@@ -109,13 +104,6 @@
             @input="change"
             clearable
             v-model="articleForm.title"
-          ></el-input>
-        </el-form-item>
-        <el-form-item label="描述" prop="description">
-          <el-input
-            @input="change"
-            clearable
-            v-model="articleForm.description"
           ></el-input>
         </el-form-item>
         <el-form-item label="分类" prop="category">

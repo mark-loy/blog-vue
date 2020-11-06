@@ -6,8 +6,6 @@
       <h2 @click="toArticleDetail(info.article.id)">
         {{ info.article.title }}
       </h2>
-      <!-- 描述信息 -->
-      <p class="decription m-text">{{ info.article.description }}</p>
       <!-- 其他信息 -->
       <p class="other-info">
         <!-- 头像 用户名 -->
@@ -25,6 +23,11 @@
           <i class="iconfont icon-browse"></i>
           {{ info.article.view_count }}
         </span>
+        <!-- 点赞数 -->
+        <span>
+          <i class="iconfont icon-dianzan"></i>
+          {{ info.article.like_count }}
+        </span>
         <!-- 分类 -->
         <el-tag size="mini">
           <i class="iconfont icon-fenlei"></i>
@@ -33,7 +36,12 @@
       </p>
       <!-- 标签信息 -->
       <div class="tag-box">
-        <el-tag v-for="tag in info.tag" :key="tag.id" size="mini" class="tag-item">
+        <el-tag
+          v-for="tag in info.tag"
+          :key="tag.id"
+          size="mini"
+          class="tag-item"
+        >
           <i class="iconfont icon-biaoqian"></i>
           {{ tag.tag_name }}
         </el-tag>
@@ -53,7 +61,7 @@ export default {
   methods: {
     /* 跳转到文章详情页面 */
     toArticleDetail(id) {
-      this.$router.push('/article/' + id)
+      this.$router.push("/article/" + id);
     },
   },
 };
@@ -61,7 +69,7 @@ export default {
 
 <style scoped>
 .article {
-  padding: 12px 10px;
+  padding: 0 10px 15px 10px;
 }
 
 h2 {
@@ -81,7 +89,7 @@ h2:hover {
 }
 
 .other-info {
-  margin-bottom: 15px;
+  margin: 15px 0;
   color: #7f7f77;
 }
 
@@ -105,7 +113,6 @@ i {
 .tag-box {
   float: left;
   margin-bottom: 15px;
-
 }
 
 .tag-item {

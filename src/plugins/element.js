@@ -38,7 +38,10 @@ import {
   Step,
   Tabs,
   TabPane,
-  MessageBox
+  MessageBox,
+  Switch,
+  Upload,
+  Image
 } from "element-ui"
 
 
@@ -79,6 +82,9 @@ Vue.use(Steps)
 Vue.use(Step)
 Vue.use(Tabs)
 Vue.use(TabPane)
+Vue.use(Switch)
+Vue.use(Upload)
+Vue.use(Image)
 
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm

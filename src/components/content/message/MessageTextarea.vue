@@ -64,11 +64,16 @@
 /* 导入表情组件 */
 import { Picker } from "emoji-mart-vue";
 
+/* 导入富文本编辑器 */
+import { mavonEditor } from "mavon-editor";
+import "mavon-editor/dist/css/index.css";
+
 import { request } from "plugins/network";
 
 export default {
   components: {
     Picker,
+    mavonEditor
   },
   props: {
     /* 整合留言区域的高度 */
@@ -108,7 +113,7 @@ export default {
   },
   computed: {
     textPlaceholder() {
-      return  this.messageName === undefined ? '请写下留言' : '@'+this.messageName
+      return  this.messageName === undefined ? '留言吧...' : '@'+this.messageName
     }
   },
   methods: {
@@ -138,7 +143,7 @@ export default {
       }
       const visitorId = window.sessionStorage.getItem("visitor-id");
       // 拼接留言内容
-      const contentPer = this.messageName === undefined ? '' : '@'+this.messageName + ' '
+      const contentPer = this.messageName === undefined ? '' : '<span style="font-weight: 700; color: #3eaf7c">@'+this.messageName + '</span> '
 
       // 发送数据请求，添加留言
       request({

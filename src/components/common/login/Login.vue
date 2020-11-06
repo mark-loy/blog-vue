@@ -33,8 +33,8 @@ export default {
         method: "post",
         url: "/github/login/oauth/access_token",
         data: {
-          client_id: "Iv1.ba5422c5eaed00e0",
-          client_secret: "775c9dc24dafc04d2b2bdbdd4a764fa763b8061f",
+          client_id: "941034207570ce50a8c4",
+          client_secret: "9a6df520deaf312428614b81333726506fba800c",
           code: query.code,
           state: query.state,
         },
@@ -82,7 +82,7 @@ export default {
           if (res.code !== 200) {
             // 跳转到/home
             this.$router.replace(router);
-            return this.$message.error("登录失败，请重试");
+            return this.$message.error("登录失败，" + res.message);
           }
           // 设置token
           window.sessionStorage.setItem("visitor-token", res.data.token);

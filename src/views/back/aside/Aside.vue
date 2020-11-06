@@ -15,13 +15,13 @@
           <i class="iconfont icon-user-group"></i>
           <span>用户管理</span>
         </template>
-        <el-menu-item>
+        <el-menu-item @click="toVisitor">
           <i class="iconfont icon-leimupinleifenleileibie2"></i
-          >访客管理</el-menu-item
+          >访客列表</el-menu-item
         >
         <el-menu-item>
           <i class="iconfont icon-leimupinleifenleileibie2"></i
-          >个人管理</el-menu-item
+          >个人列表</el-menu-item
         >
       </el-submenu>
       <el-submenu index="2">
@@ -76,6 +76,9 @@ export default {
     },
     toTag() {
       this.$router.push("/back/tag");
+    },
+    toVisitor() {
+      this.$router.push("/back/visitor");
     },
     /* 侧边栏的折叠与展开 */
     collapseAside() {

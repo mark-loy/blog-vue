@@ -98,7 +98,7 @@ export default {
 
 <style scoped>
 .message-col {
-  width: 700px;
+  max-width: 700px;
 }
 
 .total-message span {

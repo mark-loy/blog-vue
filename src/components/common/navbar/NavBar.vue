@@ -9,11 +9,11 @@
       align="middle"
     >
       <!-- logo列 -->
-      <el-col :xs="1" :sm="6" :md="6" :lg="6" :xl="6">
+      <el-col :xs="1" :sm="2" :md="3" :lg="4" :xl="6">
         <h2 class="logo">Blog</h2>
       </el-col>
 
-      <el-col :span="15">
+      <el-col :span="17">
         <el-row type="flex" align="middle">
           <!-- 菜单列 -->
           <el-col class="menu-list" :xs="0">
@@ -89,13 +89,18 @@
         <li>
           <el-link
             :underline="false"
-            href="https://github.com/login/oauth/authorize?client_id=Iv1.ba5422c5eaed00e0&redirect_uri=http://localhost:8080/login&scope=user&state=fbc9b373-1375-11eb-a817-005056c00001"
+            href="https://github.com/login/oauth/authorize?client_id=941034207570ce50a8c4&redirect_uri=http://localhost:8080/login&scope=user&state=fbc9b373-1375-11eb-a817-005056c00001"
           >
-            <i class="iconfont icon-github"></i>
+            <i class="iconfont icon-github2"></i>
           </el-link>
         </li>
         <li>
-          <i class="iconfont icon-qq"></i>
+          <el-link
+            :underline="false"
+            href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101908663&redirect_uri=http://192.168.1.4:8080/login&state=fbc9b373-1375-11eb-a817-005056c00001"
+          >
+            <i class="iconfont icon-qq1"></i>
+          </el-link>
         </li>
       </ul>
     </el-dialog>

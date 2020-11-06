@@ -23,45 +23,29 @@
     <el-row :gutter="18" type="flex" justify="center">
       <!-- 列表列 -->
       <el-col :xs="24" :sm="14" :md="12" :lg="10">
-        <!-- 当查询到文章数据列表时 -->
-        <el-card
-          class="box-card list-card-width"
-          v-if="Object.keys(articleList).length !== 0"
-        >
-          <!-- 头部区域 -->
-          <div slot="header" class="clearfix">
-            <!-- 标题 -->
-            <span class="title">博客</span>
-            <!-- 统计文章篇数 -->
-            <span class="total"
-              >共<span class="total-number">{{ total }}</span
-              >篇</span
-            >
-          </div>
 
-          <!-- 列表区域 -->
-          <div>
-            <articleList
-              v-for="article in articleList"
-              :key="article.id"
-              :info="article"
-            ></articleList>
-          </div>
+        <!-- 列表区域 -->
+        <div>
+          <articleList
+            v-for="article in articleList"
+            :key="article.id"
+            :info="article"
+          ></articleList>
+        </div>
 
-          <!-- 分页区域 -->
-          <div>
-            <el-pagination
-              background
-              layout="prev, pager, next"
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :current-page="query.currentPage"
-              :page-size="query.offset"
-              :total="total"
-            >
-            </el-pagination>
-          </div>
-        </el-card>
+        <!-- 分页区域 -->
+        <div>
+          <el-pagination
+            background
+            layout="prev, pager, next"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="query.currentPage"
+            :page-size="query.offset"
+            :total="total"
+          >
+          </el-pagination>
+        </div>
         <!-- 未找到文章博客时 -->
         <div v-if="total === 0">
           <notFound></notFound>
