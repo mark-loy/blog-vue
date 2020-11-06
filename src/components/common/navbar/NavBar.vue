@@ -10,7 +10,7 @@
     >
       <!-- logo列 -->
       <el-col :xs="1" :sm="2" :md="3" :lg="4" :xl="6">
-        <h2 class="logo">Blog</h2>
+        <a href="http://localhost:8080/" class="logo">Blog</a>
       </el-col>
 
       <el-col :span="17">
@@ -184,6 +184,8 @@ export default {
   margin-right: 10px;
   font-size: 20px;
   color: skyblue;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .menu-list {

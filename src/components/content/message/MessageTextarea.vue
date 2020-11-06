@@ -26,16 +26,10 @@
                 <el-popover
                   v-model="isShowPicker"
                   placement="bottom"
-                  width="400"
+                  width="330"
                   trigger="manual"
                 >
-                  <Picker
-                    @select="addEmoji"
-                    :include="['people']"
-                    :showSearch="false"
-                    :showPreview="false"
-                    :showCategories="false"
-                  />
+                  <VEmojiPicker :pack="pack" @select="selectEmoji" />
                   <i
                     title="表情"
                     slot="reference"
@@ -62,7 +56,7 @@
 
 <script>
 /* 导入表情组件 */
-import { Picker } from "emoji-mart-vue";
+import { VEmojiPicker, emojisDefault } from "v-emoji-picker";
 
 /* 导入富文本编辑器 */
 import { mavonEditor } from "mavon-editor";
@@ -72,8 +66,8 @@ import { request } from "plugins/network";
 
 export default {
   components: {
-    Picker,
-    mavonEditor
+    VEmojiPicker,
+    mavonEditor,
   },
   props: {
     /* 整合留言区域的高度 */
@@ -98,8 +92,8 @@ export default {
     },
     /* 父级留言人名称 */
     messageName: {
-      type: String
-    }
+      type: String,
+    },
   },
   data() {
     return {
@@ -109,26 +103,18 @@ export default {
       isShowdown: false,
       /* 控制选择表情后，隐藏界面 */
       isShowPicker: false,
+      /* 默认表情json数据 */
+      pack: emojisDefault,
     };
   },
   computed: {
     textPlaceholder() {
-      return  this.messageName === undefined ? '留言吧...' : '@'+this.messageName
-    }
+      return this.messageName === undefined
+        ? "留言吧..."
+        : "@" + this.messageName;
+    },
   },
   methods: {
-    /* 切换表情按钮颜色 */
-    showdownclick() {
-      this.isShowdown = !this.isShowdown;
-      this.isShowPicker = true;
-    },
-    /* 添加表情 */
-    addEmoji(e) {
-      /* 将表情加入textarea */
-      this.content += e.native;
-      /* 隐藏表情界面 */
-      this.isShowPicker = false;
-    },
     /* 提交留言 */
     submitMessage(type, parentId) {
       const message = this.content;
@@ -143,7 +129,12 @@ export default {
       }
       const visitorId = window.sessionStorage.getItem("visitor-id");
       // 拼接留言内容
-      const contentPer = this.messageName === undefined ? '' : '<span style="font-weight: 700; color: #3eaf7c">@'+this.messageName + '</span> '
+      const contentPer =
+        this.messageName === undefined
+          ? ""
+          : '<span style="font-weight: 700; color: #3eaf7c">@' +
+            this.messageName +
+            "</span> ";
 
       // 发送数据请求，添加留言
       request({
@@ -160,15 +151,25 @@ export default {
         if (res.code !== 200) return this.$message.eroor("留言失败");
         this.$message.success("留言成功");
         // 清空文本域
-        this.content = ""
+        this.content = "";
         // 判断是否为子留言
         if (type === 2) {
           // 发送隐藏留言编辑区域事件
-          this.$emit('displayMessage')
+          this.$emit("displayMessage");
         }
         // 刷新留言数据
-        this.$bus.$emit('refreshMessage')
+        this.$bus.$emit("refreshMessage");
       });
+    },
+    /* 切换表情按钮颜色 */
+    showdownclick() {
+      this.isShowdown = !this.isShowdown;
+      this.isShowPicker = true;
+    },
+    selectEmoji(emoji) {
+      this.content = this.content + emoji.data;
+      /* 隐藏表情界面 */
+      this.isShowPicker = false;
     },
   },
 };
