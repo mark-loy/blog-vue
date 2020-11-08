@@ -41,7 +41,9 @@ import {
   MessageBox,
   Switch,
   Upload,
-  Image
+  Image,
+  Badge,
+  Alert
 } from "element-ui"
 
 
@@ -85,6 +87,8 @@ Vue.use(TabPane)
 Vue.use(Switch)
 Vue.use(Upload)
 Vue.use(Image)
+Vue.use(Badge)
+Vue.use(Alert)
 
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm

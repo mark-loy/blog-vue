@@ -115,3 +115,29 @@ export const tagMixin = {
     },
   }
 }
+
+export const informMixin = {
+  data() {
+    return {
+      /* 通知数据源 */
+      informData: []
+    }
+  },
+  created() {
+    this.getInformData()
+  },
+  methods: {
+    /* 获取通知数据源 */
+    getInformData() {
+      adminRequest({
+        method: 'get',
+        url: '/back/inform'
+      }).then(res => {
+        console.log(res);
+        if (res.code !== 200) return this.$message.error(res.message)
+        // 成功，设置数据源
+        this.informData = res.data.informs
+      })
+    },
+  }
+}

@@ -119,9 +119,16 @@ export default {
       tags: [],
       /* 控制点赞按钮的显示、隐藏 */
       isGivelike: true,
+      /* 通知id */
+      informId: 0
     };
   },
   created() {
+    // 获取通知id
+    const informId = this.$route.params.informId
+    if (informId !== undefined) {
+      this.informId = informId
+    }
     // 获取文章详情数据源
     this.getArticleDetail(this.$route.params.id);
     // 获取文章是否点赞
@@ -144,6 +151,9 @@ export default {
       request({
         method: "get",
         url: "/home/article/" + id,
+        params: {
+          informId: this.informId
+        }
       }).then((res) => {
         // 错误提示信息
         if (res.code !== 200) return this.$message.error(res.msg);
@@ -169,7 +179,6 @@ export default {
             articleId: articleId,
           },
         }).then((res) => {
-    
           if (res.code !== 200) return this.$message.error(res.message);
           this.isGivelike = res.data.isLike === 1 ? false : true;
         });

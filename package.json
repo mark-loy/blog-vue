@@ -9,7 +9,6 @@
   "dependencies": {
     "axios": "^0.20.0",
     "element-ui": "^2.13.2",
-    "emoji-mart-vue": "^2.6.6",
     "lodash": "^4.17.20",
     "mavon-editor": "^2.9.0",
     "nprogress": "^0.2.0",

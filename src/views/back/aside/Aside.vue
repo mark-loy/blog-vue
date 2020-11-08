@@ -19,9 +19,9 @@
           <i class="iconfont icon-leimupinleifenleileibie2"></i
           >访客列表</el-menu-item
         >
-        <el-menu-item>
+        <el-menu-item @click="toAdmin">
           <i class="iconfont icon-leimupinleifenleileibie2"></i
-          >个人列表</el-menu-item
+          >管理员列表</el-menu-item
         >
       </el-submenu>
       <el-submenu index="2">
@@ -79,6 +79,9 @@ export default {
     },
     toVisitor() {
       this.$router.push("/back/visitor");
+    },
+    toAdmin() {
+      this.$router.push("/back/admin");
     },
     /* 侧边栏的折叠与展开 */
     collapseAside() {

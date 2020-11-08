@@ -28,6 +28,8 @@ const backAddArticle = () => import('views/back/article/AddArticle')
 const backCategory = () => import('views/back/category/Category')
 const backTag = () => import('views/back/tag/Tag')
 const backVisitor = () => import('views/back/user/Visitor')
+const backAdmin = () => import('views/back/user/Admin')
+const backInform = () => import('views/back/inform/Inform')
 const routes = [{
     path: '/',
     redirect: '/home',
@@ -74,7 +76,6 @@ const routes = [{
   {
     path: '/back',
     component: backHome,
-    name: 'back',
     children: [{
         path: '',
         component: welcome,
@@ -104,6 +105,16 @@ const routes = [{
         path: 'visitor',
         component: backVisitor,
         name: 'backVisitor'
+      },
+      {
+        path: 'admin',
+        component: backAdmin,
+        name: 'backAdmin'
+      },
+      {
+        path: 'inform',
+        component: backInform,
+        name: 'backInform'
       },
     ]
   },

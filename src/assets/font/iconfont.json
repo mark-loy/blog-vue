@@ -6,6 +6,34 @@
   "description": "",
   "glyphs": [
     {
+      "icon_id": "886990",
+      "name": "通知",
+      "font_class": "tongzhi",
+      "unicode": "e62d",
+      "unicode_decimal": 58925
+    },
+    {
+      "icon_id": "1026284",
+      "name": "通知",
+      "font_class": "tongzhi1",
+      "unicode": "e639",
+      "unicode_decimal": 58937
+    },
+    {
+      "icon_id": "1048852",
+      "name": "通知",
+      "font_class": "icon_notice",
+      "unicode": "e606",
+      "unicode_decimal": 58886
+    },
+    {
+      "icon_id": "17124321",
+      "name": "通知",
+      "font_class": "tongzhi2",
+      "unicode": "e63a",
+      "unicode_decimal": 58938
+    },
+    {
       "icon_id": "386487",
       "name": "QQ",
       "font_class": "qq1",

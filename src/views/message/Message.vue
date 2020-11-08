@@ -35,12 +35,18 @@ export default {
       query: {
         currentPage: 1, // 当前页
         offset: 10, // 一级留言数
+        informId: 0 
       },
       /* 控制加载更多按钮禁用 */
       isLoadingMore: false,
     };
   },
   created() {
+    // 获取通知id
+    const informId = this.$route.params.informId
+    if (informId !== undefined) {
+      this.query.informId = informId
+    }
     // 获取留言展示信息
     this.getMessage(2);
   },
@@ -58,6 +64,7 @@ export default {
         params: {
           currentPage: this.query.currentPage,
           offset: this.query.offset,
+          informId: this.query.informId
         },
       }).then((res) => {
         // 请求失败，提示信息
