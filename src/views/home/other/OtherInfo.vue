@@ -26,7 +26,7 @@
     <div class="cate-info">
       <!-- icon标题 -->
       <p class="title-icon">
-        <i class="iconfont icon-fenlei"></i>
+        <i class="iconfont icon-leimupinleifenleileibie2"></i>
         分类
         <!-- 更多分类icon -->
         <a href="/category"><i class="el-icon-arrow-right more-icon"></i></a>
@@ -55,7 +55,7 @@
     <div class="tag-info">
       <!-- icon标题 -->
       <p class="title-icon">
-        <i class="iconfont icon-biaoqian"></i>
+        <i class="iconfont icon-biaoqian1"></i>
         标签
         <!-- 更多标签icon -->
         <a href="/tag"><i class="el-icon-arrow-right more-icon"></i></a>
@@ -118,24 +118,19 @@ export default {
       // 路由跳转
       this.$router.push("/category");
       // 通过事件总线，发射事件
-      // nextTick: 路由跳转完成之后执行（异步操作）
-      this.$nextTick(() => { 
-        setTimeout(() => { //
-          this.$bus.$emit("tabNavBar", cateId);
-        }, 30);
-      });
+      setTimeout(() => {
+        //
+        this.$bus.$emit("tabNavBar", cateId);
+      }, 100);
     },
     /* 路由跳转到标签页面 */
     toTag(tagId) {
       // 路由跳转
       this.$router.push("/tag");
       // 通过事件总线，发射事件
-      // nextTick: 路由跳转完成之后执行（异步操作）
-      this.$nextTick(() => {
-        setTimeout(() => {
-          this.$bus.$emit("tabNavBar", tagId);
-        }, 30);
-      });
+      setTimeout(() => {
+        this.$bus.$emit("tabNavBar", tagId);
+      }, 100);
     },
   },
 };
@@ -203,7 +198,7 @@ export default {
 }
 
 .cate-list:hover .cate-name {
-  color: skyblue;
+  color: #3eaf7c;
 }
 
 .cate-name {

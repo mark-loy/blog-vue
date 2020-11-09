@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-row type="flex" justify="center">
-      <el-col :xs="24" :sm="15" :md="14" :lg="13" :xl="12">
+      <el-col style="width: 940px">
         <!-- 头部区域 -->
         <div class="content-bd">
           <!-- 标题 -->
@@ -9,19 +9,19 @@
           <!-- 其他信息 -->
           <ul class="ul-info">
             <!-- 用户信息(可链接) -->
-            <li><i class="iconfont icon-yonghu"></i> {{ user.pet_name }}</li>
+            <li><i class="iconfont icon-yonghu1"></i> {{ user.pet_name }}</li>
             <!-- 创建时间 -->
             <li>
-              <i class="iconfont icon-shijian-xian"></i>
+              <i class="iconfont icon-shizhong"></i>
               {{ articleData.gmtCreate | dateFormat("yyyy-MM-dd") }}
             </li>
             <!-- 浏览数量 -->
             <li>
-              <i class="iconfont icon-browse"></i> {{ articleData.viewCount }}
+              <i class="iconfont icon-liulan"></i> {{ articleData.viewCount }}
             </li>
             <!-- 点赞数 -->
             <li>
-              <i class="iconfont icon-dianzan"></i>
+              <i class="iconfont icon-dianzan1"></i>
               {{ articleData.likeCount }}
             </li>
             <!-- 分类信息（可链接） -->
@@ -35,7 +35,7 @@
           <!-- 标签信息（可链接） -->
           <ul class="tags-info">
             <li v-for="tag in tags" :key="tag.id">
-              <el-tag size="mini">
+              <el-tag size="mini" type="success">
                 <i class="iconfont icon-biaoqian"></i>
                 {{ tag.tag_name }}
               </el-tag>
@@ -44,9 +44,9 @@
         </div>
 
         <!-- 展示图 -->
-        <p class="show-img">
-          <img :src="articleData.showImg" alt="" />
-        </p>
+        <div class="show-img">
+          <img :src="articleData.showImg" style="width: 930px; height: 574px" alt="" />
+        </div>
 
         <!-- 内容区域 -->
         <div class="article-content" ref="artContent">
@@ -272,7 +272,7 @@ export default {
 .tags-info {
   width: 100%;
   height: 40px;
-  line-height: 40px;
+  line-height: 30px;
 }
 
 .tags-info li {
@@ -281,7 +281,7 @@ export default {
   list-style: none;
 }
 .show-img {
-  margin-top: 30px;
+  margin-top: 10px;
   text-align: center;
 }
 .show-img img {

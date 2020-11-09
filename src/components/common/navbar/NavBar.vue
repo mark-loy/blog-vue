@@ -10,7 +10,7 @@
     >
       <!-- logo列 -->
       <el-col :xs="1" :sm="2" :md="3" :lg="4" :xl="6">
-        <a href="http://localhost:8080/" class="logo">Blog</a>
+        <a href="http://localhost:8080/" class="logo">MBlog</a>
       </el-col>
 
       <el-col :span="17">
@@ -183,7 +183,7 @@ export default {
   float: right;
   margin-right: 10px;
   font-size: 20px;
-  color: skyblue;
+  color: #3eaf7c;
   font-weight: 600;
   text-decoration: none;
 }

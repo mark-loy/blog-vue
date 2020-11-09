@@ -108,7 +108,7 @@ export default {
 }
 
 .cate-all:hover .cate-all-name {
-  color: skyblue;
+  color: #3eaf7c;
 }
 
 .cate-all:hover {
@@ -138,7 +138,7 @@ export default {
 }
 
 .cate-list:hover .cate-name {
-  color: skyblue;
+  color: #3eaf7c;
 }
 
 .cate-name {
