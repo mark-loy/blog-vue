@@ -5,9 +5,44 @@ function resolve(dir) {
 }
 
 module.exports = {
-  /* 配置别名 */
+  chainWebpack: config => {
+    // 生产环境
+    config.when(process.env.NODE_ENV === 'production', config => {
+      // 配置生产环境入口文件
+      config.entry('app').clear().add('./src/prod.js')
+      // 配置需要加载的cdn资源名
+      config.set('externals', {
+        vue: 'Vue',
+        'vue-router': 'VueRouter',
+        'vuex': 'Vuex',
+        axios: 'axios',
+        loadsh: '_',
+        nprogress: 'nprogress',
+        'mavon-editor': 'mavonEditor',
+      })
+      // 配置首页title的标识符
+      config.plugin('html').tap(args => {
+        args[0].isProd = true
+        return args
+      })
+    })
+    // 测试环境
+    config.when(process.env.NODE_ENV === 'development', config => {
+      // 配置测试环境入口文件
+      config.entry('app').clear().add('./src/dev.js')
+      // 配置首页title的标识符
+      config.plugin('html').tap(args => {
+        args[0].isProd = false
+        return args
+      })
+    })
+  },
+  css: {
+    extract: false
+  },
   configureWebpack: {
     resolve: {
+      /* 配置别名 */
       alias: {
         "@": "src",
         "assets": resolve("src/assets"),
@@ -33,7 +68,7 @@ module.exports = {
         changOrigin: true, // 允许跨域
         pathRewrite: { // 路径重写
           '^/getUser': ''
-        }      
+        }
       },
     }
   },

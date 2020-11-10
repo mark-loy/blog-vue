@@ -107,7 +107,7 @@ export default {
         url: "/tag/all",
       }).then((res) => {
         // 提示错误信息
-        if (res.code !== 200) return this.$message.error(res.msg);
+        if (res.code !== 200) return this.$message.error(res.message);
         // 设置数据源
         this.tagData = res.data.tags;
       });

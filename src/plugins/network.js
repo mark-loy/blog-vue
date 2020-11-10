@@ -1,4 +1,6 @@
 import axios from 'axios'
+/* 导入baseURL */
+import baseURL from '../../baseURL'
 /* 导入进度条插件js、css */
 import nprogress from 'nprogress'
 import 'nprogress/nprogress.css'
@@ -7,7 +9,7 @@ import 'nprogress/nprogress.css'
 export function request(config) {
   // 1.创建axios的实例
   const instance = axios.create({
-    baseURL: 'http://192.168.1.4:8888/private/api',
+    baseURL: baseURL,
     timeout: 5000
   })
 
@@ -41,7 +43,7 @@ export function request(config) {
 export function adminRequest(config) {
   // 1.创建axios的实例
   const instance = axios.create({
-    baseURL: 'http://192.168.1.4:8888/private/api',
+    baseURL: baseURL,
     timeout: 5000
   })
 

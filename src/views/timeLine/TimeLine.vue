@@ -43,7 +43,6 @@ export default {
         method: "get",
         url: "/timeLine",
       }).then((res) => {
-        console.log(res);
         // 错误消息提示
         if (res.code !== 200) return this.$message.error(res.msg);
         // 设置数据源

@@ -43,6 +43,7 @@
             :current-page="query.currentPage"
             :page-size="query.offset"
             :total="total"
+            hide-on-single-page 
           >
           </el-pagination>
         </div>
