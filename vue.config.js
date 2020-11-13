@@ -17,8 +17,8 @@ module.exports = {
         'vuex': 'Vuex',
         axios: 'axios',
         loadsh: '_',
-        nprogress: 'nprogress',
-        'mavon-editor': 'mavonEditor',
+        nprogress: 'NProgress',
+        'mavon-editor': 'MavonEditor',
       })
       // 配置首页title的标识符
       config.plugin('html').tap(args => {
@@ -37,14 +37,11 @@ module.exports = {
       })
     })
   },
-  css: {
-    extract: false
-  },
   configureWebpack: {
     resolve: {
       /* 配置别名 */
       alias: {
-        "@": "src",
+        "src": "src",
         "assets": resolve("src/assets"),
         "common": resolve("src/common"),
         "components": resolve("src/components"),
@@ -60,14 +57,14 @@ module.exports = {
         target: 'https://github.com', // 跨域的目标地址
         changOrigin: true, // 允许跨域
         pathRewrite: { // 路径重写
-          '^/github': ''
+          '^/github': '/'
         }
       },
       '/getUser': {
         target: 'https://api.github.com',
         changOrigin: true, // 允许跨域
         pathRewrite: { // 路径重写
-          '^/getUser': ''
+          '^/getUser': '/'
         }
       },
     }

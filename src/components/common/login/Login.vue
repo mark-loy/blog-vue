@@ -6,6 +6,7 @@
 import { request, crossRequest } from "plugins/network";
 import { Loading } from "element-ui";
 
+import {githubClientId, githubClientSecret} from '../../../envParams'
 export default {
   data() {
     return {
@@ -33,8 +34,8 @@ export default {
         method: "post",
         url: "/github/login/oauth/access_token",
         data: {
-          client_id: "941034207570ce50a8c4",
-          client_secret: "9a6df520deaf312428614b81333726506fba800c",
+          client_id: githubClientId,
+          client_secret: githubClientSecret,
           code: query.code,
           state: query.state,
         },

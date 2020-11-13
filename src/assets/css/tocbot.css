@@ -4,12 +4,11 @@
 
 .toc>.toc-list {
   overflow: hidden;
-  position: relative;
+  position: relative
 }
 
 .toc>.toc-list li {
-  list-style: none;
-  
+  list-style: none
 }
 
 .toc-list {
@@ -19,45 +18,33 @@
 }
 
 .toc-list-item {
-  padding: 5px 0;
+  padding: 3px 0;
   
 }
 
-a.toc-link {
+.toc-link {
+  display: block;
   color: currentColor;
   height: 100%;
   text-decoration: none;
-  font-size: 15px;
-  font-weight: 300;
+  padding: 2px 0;
 }
 
 .is-collapsible {
-  margin-top: 5px;
   max-height: 1000px;
   overflow: hidden;
-  transition: all 300ms ease-in-out;
-  padding-left: 15px;
-}
-
-.is-collapsed {
-  
-}
-
-.is-position-fixed {
-  position: fixed !important;
-  top: 0
+  transition: all 300ms ease-in-out
 }
 
 .is-active-link {
-  font-weight: 500 !important;
-  color: #1b817c !important;
+  font-weight: 700
 }
 
 .toc-link::before {
   background-color: #EEE;
-  content: ' ';
+  content: '';
   display: inline-block;
-  height: 32px;
+  height: 43px;
   left: 0;
   margin-top: -5px;
   position: absolute;

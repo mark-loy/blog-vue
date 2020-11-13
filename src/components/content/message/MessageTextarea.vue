@@ -58,16 +58,12 @@
 /* 导入表情组件 */
 import { VEmojiPicker, emojisDefault } from "v-emoji-picker";
 
-/* 导入富文本编辑器 */
-import { mavonEditor } from "mavon-editor";
-import "mavon-editor/dist/css/index.css";
 
 import { request } from "plugins/network";
 
 export default {
   components: {
-    VEmojiPicker,
-    mavonEditor,
+    VEmojiPicker
   },
   props: {
     /* 整合留言区域的高度 */

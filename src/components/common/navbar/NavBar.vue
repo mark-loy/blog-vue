@@ -10,7 +10,7 @@
     >
       <!-- logo列 -->
       <el-col :xs="1" :sm="2" :md="3" :lg="4" :xl="6">
-        <a href="http://localhost:8080/" class="logo">MBlog</a>
+        <a :href="logoUrl" class="logo">MBlog</a>
       </el-col>
 
       <el-col :span="17">
@@ -87,18 +87,12 @@
     >
       <ul class="login-dialog">
         <li>
-          <el-link
-            :underline="false"
-            href="https://github.com/login/oauth/authorize?client_id=941034207570ce50a8c4&redirect_uri=http://localhost:8080/login&scope=user&state=fbc9b373-1375-11eb-a817-005056c00001"
-          >
+          <el-link :underline="false" :href="loginGithubUrl">
             <i class="iconfont icon-github2"></i>
           </el-link>
         </li>
         <li>
-          <el-link
-            :underline="false"
-            href="https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101908663&redirect_uri=http://192.168.1.4:8080/login&state=fbc9b373-1375-11eb-a817-005056c00001"
-          >
+          <el-link :underline="false" :href="loginQQUrl">
             <i class="iconfont icon-qq1"></i>
           </el-link>
         </li>
@@ -109,6 +103,8 @@
 
 <script>
 import MenuList from "./MenuList";
+
+import { logoUrl, loginGithubUrl, loginQQUrl } from "../../../envParams";
 
 export default {
   name: "NavBar",
@@ -125,6 +121,10 @@ export default {
       loginDialogVisible: false,
       /* 控制登录按钮的显示、隐藏 */
       isShowLoginBtn: true,
+      /* 从环境分离参数文件中获取url */
+      logoUrl: logoUrl,
+      loginGithubUrl: loginGithubUrl,
+      loginQQUrl: loginQQUrl
     };
   },
   beforeCreate() {

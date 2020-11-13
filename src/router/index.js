@@ -30,6 +30,7 @@ const backTag = () => import('views/back/tag/Tag')
 const backVisitor = () => import('views/back/user/Visitor')
 const backAdmin = () => import('views/back/user/Admin')
 const backInform = () => import('views/back/inform/Inform')
+
 const routes = [{
     path: '/',
     redirect: '/home',

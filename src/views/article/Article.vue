@@ -1,149 +1,65 @@
 <template>
   <div>
     <el-row type="flex" justify="center">
-      <el-col style="width: 940px">
-        <!-- 头部区域 -->
-        <div class="content-bd">
-          <!-- 标题 -->
-          <h1 class="article-title">{{ articleData.title }}</h1>
-          <!-- 其他信息 -->
-          <ul class="ul-info">
-            <!-- 用户信息(可链接) -->
-            <li><i class="iconfont icon-yonghu1"></i> {{ user.pet_name }}</li>
-            <!-- 创建时间 -->
-            <li>
-              <i class="iconfont icon-shizhong"></i>
-              {{ articleData.gmtCreate | dateFormat("yyyy-MM-dd") }}
-            </li>
-            <!-- 浏览数量 -->
-            <li>
-              <i class="iconfont icon-liulan"></i> {{ articleData.viewCount }}
-            </li>
-            <!-- 点赞数 -->
-            <li>
-              <i class="iconfont icon-dianzan1"></i>
-              {{ articleData.likeCount }}
-            </li>
-            <!-- 分类信息（可链接） -->
-            <li>
-              <el-tag size="mini">
-                <i class="iconfont icon-leimupinleifenleileibie2"></i>
-                {{ cate.cate_name }}
-              </el-tag>
-            </li>
-          </ul>
-          <!-- 标签信息（可链接） -->
-          <ul class="tags-info">
-            <li v-for="tag in tags" :key="tag.id">
-              <el-tag size="mini" type="success">
-                <i class="iconfont icon-biaoqian"></i>
-                {{ tag.tag_name }}
-              </el-tag>
-            </li>
-          </ul>
-        </div>
-
-        <!-- 展示图 -->
-        <div class="show-img">
-          <img :src="articleData.showImg" style="width: 930px; height: 574px" alt="" />
-        </div>
-
-        <!-- 内容区域 -->
-        <div class="article-content" ref="artContent">
-          <mavon-editor
-            v-model="articleData.context"
-            :subfield="false"
-            defaultOpen="preview"
-            :toolbarsFlag="false"
-            :editable="false"
-            :scrollStyle="true"
-            codeStyle="gruvbox-dark"
-          ></mavon-editor>
-        </div>
-
-        <!-- 点赞区域 -->
-        <div class="article-dianzan">
-          <!-- 点赞按钮 -->
-          <el-button v-if="isGivelike" @click="giveLike(1)">
-            <i class="iconfont icon-dianzan" style="font-size: 20px"></i>
-          </el-button>
-          <!-- 取消点赞按钮 -->
-          <el-button v-else @click="giveLike(0)" type="primary">
-            <i class="iconfont icon-dianzan" style="font-size: 20px"></i>
-          </el-button>
-        </div>
-
-        <!-- 最后更新时间 -->
-        <div class="last-update">
-          <span class="descrip">Last Updated：</span>
-          <span class="last-time"
-            >{{ articleData.gmtModified | dateFormat("yyyy-MM-dd hh:mm:ss") }}
-          </span>
-        </div>
+      <el-col :xs="24" :sm="24" :md="18" :lg="16" :xl="12">
+        <articleItem
+          :articleData="articleData"
+          :isGivelike="isGivelike"
+          @giveLike="giveLike"
+          @imgLoad="imgLoad"
+        >
+          <articlePreview
+            slot="preview"
+            :context="context"
+            ref="artContent"
+          ></articlePreview>
+        </articleItem>
       </el-col>
     </el-row>
 
-    <!-- 移动端目录 -->
+    <!-- 文章目录 -->
     <el-row class="app-menu">
-      <el-col :span="2">
-        <el-popover placement="left" width="180" trigger="click">
-          <ul class="js-toc"></ul>
-          <el-button type="primary" size="mini" slot="reference"
-            >目录</el-button
-          >
-        </el-popover>
+      <el-col :xs="0"  >
+        <ol class="js-toc"></ol>
       </el-col>
     </el-row>
   </div>
 </template>
 
 <script>
-import { request } from "plugins/network";
+import articleItem from "./ArticleItem";
+import articlePreview from "./ArticlePreview";
 
-/* 导入富文本编辑器 */
-import { mavonEditor } from "mavon-editor";
-import "mavon-editor/dist/css/index.css";
+import { request } from "plugins/network";
 
 /* 目录生成css */
 import tocbot from "tocbot";
 
 export default {
   components: {
-    mavonEditor,
+    articleItem,
+    articlePreview,
   },
   data() {
     return {
       articleData: {},
-      user: {},
-      cate: {},
-      tags: [],
+      context: "",
       /* 控制点赞按钮的显示、隐藏 */
       isGivelike: true,
       /* 通知id */
-      informId: 0
+      informId: 0,
     };
   },
   created() {
     // 获取通知id
-    const informId = this.$route.params.informId
+    const informId = this.$route.params.informId;
     if (informId !== undefined) {
-      this.informId = informId
+      this.informId = informId;
     }
     // 获取文章详情数据源
     this.getArticleDetail(this.$route.params.id);
     // 获取文章是否点赞
     this.getIsLike(this.$route.params.id);
-  },
-  mounted() {
-    setTimeout(() => {
-      this.addMao();
-      tocbot.init({
-        tocSelector: ".js-toc", //要把目录添加元素位置，支持选择器
-        contentSelector: ".js-toc-content", //获取html的元素
-        headingSelector: "h1, h2, h3", //要显示的id的目录
-        hasInnerContainers: true,
-      });
-    }, 300);
   },
   methods: {
     /* 获取文章详情数据源 */
@@ -152,16 +68,15 @@ export default {
         method: "get",
         url: "/home/article/" + id,
         params: {
-          informId: this.informId
-        }
+          informId: this.informId,
+        },
       }).then((res) => {
+        console.log(res);
         // 错误提示信息
         if (res.code !== 200) return this.$message.error(res.msg);
         // 设置数据源
-        this.articleData = res.data.article;
-        this.user = res.data.user;
-        this.cate = res.data.cate;
-        this.tags = res.data.tags;
+        this.articleData = res.data;
+        this.context = res.data.article.context;
       });
     },
     /* 获取文章是否点赞 */
@@ -191,7 +106,7 @@ export default {
       // 判断访客是否存在
       if (visitor_id !== null && visitor_id !== "") {
         // 文章id
-        const articleId = this.$route.params.id
+        const articleId = this.$route.params.id;
         request({
           method: "put",
           url: "/home/like/article",
@@ -200,22 +115,44 @@ export default {
             visitorId: visitor_id,
             articleId: articleId,
           },
-        }).then(res => {
-          if (res.code !== 200) return this.$message.error(res.message)
+        }).then((res) => {
+          if (res.code !== 200) return this.$message.error(res.message);
+          if (type === 1) {
+            this.$message.success("点赞成功");
+          } else {
+            this.$message.success("取消点赞");
+          }
           // 重新获取文章是否已点赞
-          this.getIsLike(articleId)
+          this.getIsLike(articleId);
           // 刷新页面数据
-          this.getArticleDetail(articleId)
+          this.getArticleDetail(articleId);
         });
       } else {
         this.$message.error("登录后点赞");
       }
     },
+    /* 监听子组件中图片加载后回调 */
+    imgLoad() {
+      // 图片加载完成，再生成目录信息
+      setTimeout(() => {
+        this.addMao();
+        tocbot.init({
+          tocSelector: ".js-toc", //要把目录添加元素位置，支持选择器
+          contentSelector: ".js-toc-content", //获取html的元素
+          headingSelector: "h1, h2, h3", //要显示的id的目录
+          scrollSmooth: true,
+          scrollSmoothOffset: -80, // 锚点定位顶部的偏移量
+          headingsOffset: 120, // 目录滚动偏移量，实现文章与目录滚动同步
+          hasInnerContainers: true
+        });
+      }, 500);
+    },
     /* 给自动生成目录的h标签，添加id */
     addMao() {
       // 获取内容中的所有子节点
-      let parentNodes = this.$refs.artContent.children[0].children[1]
-        .children[1].children[0];
+      let parentNodes = this.$refs.artContent.$children[0].$el.children[1]
+        .children[1].childNodes[0];
+      console.log(parentNodes);
       if (parentNodes.className !== null) {
         parentNodes.className = parentNodes.className + " js-toc-content";
       }
@@ -241,86 +178,11 @@ export default {
 /* 引入自动生成目录的css */
 @import "~assets/css/tocbot.css";
 
-.content-bd {
-  padding: 10px 10px;
-}
-
-.article-title {
-  font-size: 24px;
-  font-weight: 500;
-  color: #242424;
-}
-
-.ul-info {
-  width: 100%;
-  height: 30px;
-  line-height: 20px;
-}
-
-.ul-info li {
-  float: left;
-  padding: 4px 0;
-  margin-right: 14px;
-  color: #7f7f7f;
-  list-style: none;
-}
-
-.ul-info li i {
-  font-size: 13px;
-}
-
-.tags-info {
-  width: 100%;
-  height: 40px;
-  line-height: 30px;
-}
-
-.tags-info li {
-  margin-right: 15px;
-  float: left;
-  list-style: none;
-}
-.show-img {
-  margin-top: 10px;
-  text-align: center;
-}
-.show-img img {
-  width: 100%;
-}
-
-.article-content {
-  margin: 20px 5px;
-}
-
-.last-update {
-  margin-top: 20px;
-  float: right;
-}
-
-.last-update .descrip {
-  color: #3eaf7c;
-  font-size: 13px;
-}
-
-.last-update .last-time {
-  color: #aaa;
-  font-size: 12px;
-}
-
 .app-menu {
+  width: 200px;
   position: fixed;
   right: 10px;
-  bottom: 150px;
+  top: 150px;
   z-index: 2000;
-}
-
-.app-menu .el-button {
-  padding: 6px 5px !important;
-}
-
-.article-dianzan {
-  display: block;
-  width: 100%;
-  text-align: center;
 }
 </style>

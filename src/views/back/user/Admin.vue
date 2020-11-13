@@ -94,6 +94,8 @@
 <script>
 import { adminRequest } from "plugins/network";
 
+import { imageUrl } from '../../../envParams'
+
 export default {
   data() {
     return {
@@ -118,7 +120,7 @@ export default {
         email: [{ required: true, message: "请输入邮箱", trigger: "blur" }],
       },
       /* 图片上传地址 */
-      imageURL: "http://192.168.1.4:8888/back/file/upload",
+      imageURL: imageUrl,
       /* 图片上传请求头 */
       imageHeader: {
         Authorization: window.sessionStorage.getItem("admin-token"),

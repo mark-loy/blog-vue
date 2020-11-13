@@ -64,14 +64,9 @@
 <script>
 import MessageTextarea from "./MessageTextarea";
 
-/* 导入富文本编辑器 */
-import { mavonEditor } from "mavon-editor";
-import "mavon-editor/dist/css/index.css";
-
 export default {
   components: {
     MessageTextarea,
-    mavonEditor,
   },
   props: {
     /* 留言数据源 */

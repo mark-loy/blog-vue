@@ -95,7 +95,6 @@
               <mavon-editor
                 v-model="articleForm.context"
                 @imgAdd="$imgAdd"
-                @imgDel="$imgDel"
                 ref="md"
                 style="min-height: 500px; margin: 0 10px"
               ></mavon-editor>
@@ -127,14 +126,9 @@ import { adminRequest } from "plugins/network";
 
 import { categoryMixin, tagMixin } from "common/mixin";
 
-/* 导入富文本编辑器 */
-import { mavonEditor } from "mavon-editor";
-import "mavon-editor/dist/css/index.css";
+import { imageUrl } from '../../../envParams'
 
 export default {
-  components: {
-    mavonEditor,
-  },
   data() {
     return {
       /* 添加文章表单 */
@@ -159,7 +153,7 @@ export default {
         header: true, // 标题
       },
       /* 图片上传地址 */
-      imageURL: "http://192.168.1.4:8888/back/file/upload",
+      imageURL: imageUrl,
       /* 图片上传请求头 */
       imageHeader: {
         Authorization: window.sessionStorage.getItem("admin-token"),
@@ -274,10 +268,6 @@ export default {
         this.$refs.md.$img2Url(pos, response.data.url);
       });
     },
-    /* mavon编辑器 移除上传的图片 */
-    $imgDel() {
-
-    }
   },
 };
 </script>

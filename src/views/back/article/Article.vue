@@ -137,7 +137,19 @@
             </el-option>
           </el-select>
         </el-form-item>
-        <el-form-item label="展示图" prop="title"> </el-form-item>
+        <el-form-item label="展示图" prop="title">
+          <el-image :src="articleForm.showImg" style="height: 400px"></el-image>
+          <el-upload
+            :action="imageURL"
+            :headers="imageHeader"
+            :on-success="handleSuccess"
+            :on-preview="handlePreview"
+            :on-remove="handleRemove"
+            list-type="picture"
+          >
+            <el-button size="small" type="primary">点击上传</el-button>
+          </el-upload>
+        </el-form-item>
         <el-form-item label="正文" prop="title">
           <!-- 文章内容添加区域 -->
           <mavon-editor
@@ -157,6 +169,11 @@
         >
       </span>
     </el-dialog>
+
+    <!-- 图片预览 -->
+    <el-dialog title="图片预览" :visible.sync="imagePreviewDialog" width="50%">
+      <el-image :src="imagePreView" style="width: 100%"></el-image>
+    </el-dialog>
   </div>
 </template>
 
@@ -168,6 +185,8 @@ import { categoryMixin, tagMixin } from "common/mixin";
 /* 导入富文本编辑器 */
 import { mavonEditor } from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
+
+import { imageUrl } from "../../../envParams";
 
 export default {
   components: {
@@ -195,6 +214,16 @@ export default {
       editorOption: {
         placeholder: "文章内容",
       },
+      /* 图片上传地址 */
+      imageURL: imageUrl,
+      /* 图片上传请求头 */
+      imageHeader: {
+        Authorization: window.sessionStorage.getItem("admin-token"),
+      },
+      /* 控制图片预览对话框显示、隐藏 */
+      imagePreviewDialog: false,
+      /* 图片预览路径 */
+      imagePreView: "",
     };
   },
   mixins: [categoryMixin, tagMixin],
@@ -234,7 +263,7 @@ export default {
           /* 发送数据请求 */
           adminRequest({
             method: "put",
-            url: "/back//article",
+            url: "/back/article",
             data: articleForm,
           }).then((res) => {
             if (res.code !== 200) return this.$message.error(res.message);
@@ -291,6 +320,8 @@ export default {
         this.articleForm.tags.push(element.id);
       });
       this.articleForm.context = articleData.article.context;
+      this.articleForm.showImg = articleData.article.showImg;
+      console.log(this.articleForm.showImg);
       // 获取分类数据
       this.getCategoryData();
       // 获取标签数据
@@ -313,6 +344,35 @@ export default {
       this.query.currentPage = val;
       // 刷新页面数据
       this.getArticleData();
+    },
+    /* 文件上传成功 */
+    handleSuccess(response) {
+      if (response.code !== 200) return this.$message.error("图片上传失败！");
+      // 成功
+      this.$message.success("图片上传成功！");
+      // 设置表单展示图属性
+      this.articleForm.showImg = response.data.url;
+    },
+    /* 上传文件预览 */
+    handlePreview(file) {
+      // 打开图片预览对话框
+      this.imagePreviewDialog = true;
+      // 设置url
+      this.imagePreView = file.response.data.url;
+    },
+    /* 移除上传的文件 */
+    handleRemove(file) {
+      // 获取文件名
+      const fileName = file.response.data.fileName;
+      // 发送请求
+      adminRequest({
+        method: "delete",
+        url: `/back/file/delete/${fileName}`,
+      }).then((res) => {
+        if (res.code !== 200) return this.$message.error("移除图片失败");
+        // 成功
+        this.$message.success("移除图片成功");
+      });
     },
   },
 };

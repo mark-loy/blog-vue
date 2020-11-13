@@ -7,7 +7,9 @@ import store from './store'
 import './common/util'
 /* 引入lodash */
 import _ from 'lodash'
-
+/* 引入富文本编辑器 */
+import mavonEditor from "mavon-editor";
+Vue.use(mavonEditor)
 
 Vue.config.productionTip = false
 
