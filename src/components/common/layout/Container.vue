@@ -18,10 +18,12 @@
           <!-- 导航栏 -->
           <navbar></navbar>
         </el-header>
-        <!-- 内容区域 -->
-        <el-main>
-          <router-view />
-        </el-main>
+        
+          <!-- 内容区域 -->
+          <el-main>
+            <router-view />
+          </el-main>
+        
         <!-- 底部区域 -->
         <el-footer height="300">
           <!-- footer -->
@@ -33,7 +35,7 @@
     <!-- 回到顶部 -->
     <el-backtop :bottom="100" :right="10">
       <div class="backtop">
-        <i class="iconfont icon-icon-test" style="font-size: 38px"></i>
+        <i class="iconfont icon-huojian" style="font-size: 38px"></i>
       </div>
     </el-backtop>
   </div>
@@ -43,7 +45,6 @@
 // 前台展示页面导航、footer组件
 import navbar from "../navbar/NavBar";
 import footerCpn from "../footer/Footer";
-
 
 // 后台组件
 import adminLogin from "views/back/login/BackLogin";
@@ -87,7 +88,7 @@ export default {
   width: 100%;
   z-index: 2000;
 
-  background-color: #696c6e;
+  background-color: #4d5f6c !important;
   margin-bottom: 15px;
 }
 
@@ -99,7 +100,7 @@ export default {
 
 .el-footer {
   margin-top: 20px;
-  background-color: #696c6e;
+  background-color: #4d5f6c !important;
 }
 
 .el-backtop {

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="Object.keys(timeLineData).length !== 0">
+  <div v-if="Object.keys(timeLineData).length !== 0" class="animate__animated animate__zoomIn">
     <el-row type="flex" justify="center">
       <el-col :xs="24" :sm="10" :md="9" :lg="8">
         <!-- 时间线区域 -->
@@ -10,7 +10,7 @@
                 timeline.year
               }}</span></el-timeline-item
             >
-            <el-timeline-item v-for="item in timeline.articles" :key="item.id">
+            <el-timeline-item v-for="item in timeline.articles" :key="item.id" color="#0bbd87">
               <el-link :underline="false" :href="'/article/' + item.id" class="link-font"
                 ><span class="date-font">{{ item.date }}</span>
                 <span class="title-font">{{ item.title }}</span></el-link

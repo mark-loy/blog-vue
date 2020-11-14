@@ -56,7 +56,7 @@
       <!-- PC个人信息列 -->
       <div v-if="Object.keys(otherInfoData).length !== 0">
         <el-col :xs="0" :sm="4">
-          <el-card class="info-card-width" shadow="hover">
+          <el-card class="info-card-width animate__animated animate__bounceInRight" shadow="hover">
             <otherCpn :otherInfo="otherInfoData"></otherCpn>
           </el-card>
         </el-col>
@@ -67,7 +67,7 @@
     <div v-if="Object.keys(otherInfoData).length !== 0">
       <el-row class="mobile-user">
         <el-col :xs="24" :sm="0">
-          <el-card class="info-card-width" shadow="hover">
+          <el-card class="info-card-width animate__animated animate__bounceInRight" shadow="hover">
             <otherCpn :otherInfo="otherInfoData"></otherCpn>
           </el-card>
         </el-col>

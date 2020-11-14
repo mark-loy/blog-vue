@@ -1,6 +1,6 @@
 <template>
   <!-- 判断otherinfo中是否存在数据， -->
-  <div class="other-info" v-if="Object.keys(otherInfo).length !== 0">
+  <div class="other-info " v-if="Object.keys(otherInfo).length !== 0">
     <!-- 个人信息区域 -->
     <div class="user-info">
       <!-- 头像 -->
@@ -82,7 +82,7 @@
     <div>
       <!-- icon标题 -->
       <p class="title-icon">
-        <i class="iconfont icon-youqinglianjie"></i>
+        <i class="iconfont icon-_lianjie"></i>
         友情链接
       </p>
       <p>

@@ -20,7 +20,10 @@
     </el-row>
 
     <!-- 引用导航组件 -->
-    <div v-if="Object.keys(articleList).length !== 0">
+    <div
+      v-if="Object.keys(articleList).length !== 0"
+      class="animate__animated animate__bounceInDown"
+    >
       <article-nav-bar
         @findArticleById="findArticleByTagId"
         :data="tagData"
@@ -33,7 +36,7 @@
     <!-- 分类数据列表行 -->
     <el-row type="flex" justify="center">
       <el-col :xs="24" :sm="14" :md="12" :lg="12">
-        <el-card v-if="Object.keys(articleList).length !== 0">
+        <div v-if="Object.keys(articleList).length !== 0">
           <!-- 文章列表区域 -->
           <articleList
             v-for="article in articleList"
@@ -44,6 +47,7 @@
           <!-- 分页区域 -->
           <el-pagination
             background
+            hide-on-single-page
             layout="prev, pager, next"
             @size-change="handleSizeChange"
             @current-change="handleCurrentChange"
@@ -52,7 +56,8 @@
             :total="total"
           >
           </el-pagination>
-        </el-card>
+        </div>
+
         <!-- 未找到文章博客时 -->
         <div v-if="total === 0">
           <notFound></notFound>

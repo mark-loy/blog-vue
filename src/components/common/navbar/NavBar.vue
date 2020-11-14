@@ -10,7 +10,7 @@
     >
       <!-- logo列 -->
       <el-col :xs="1" :sm="2" :md="3" :lg="4" :xl="6">
-        <a :href="logoUrl" class="logo">MBlog</a>
+        <a :href="logoUrl" class="logo animate__animated animate__bounce">MBlog</a>
       </el-col>
 
       <el-col :span="17">

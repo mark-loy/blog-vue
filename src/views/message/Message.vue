@@ -2,9 +2,13 @@
   <!-- 留言 -->
   <div class="message">
     <!-- 引用留言编辑组件 -->
-    <MessageTextarea></MessageTextarea>
+    <div class="animate__animated animate__bounceInDown">
+      <MessageTextarea></MessageTextarea>
+    </div>
     <!-- 引用留言展示组件 -->
-    <MessageShow :messages="messages" :total="total"> </MessageShow>
+    <div class="animate__animated animate__bounceInUp">
+      <MessageShow :messages="messages" :total="total"> </MessageShow>
+    </div>
     <!-- 加载更多 -->
     <p v-if="total >= query.offset" class="loading-more">
       <el-button @click="messageLoding" :disabled="isLoadingMore" size="mini"
@@ -35,7 +39,7 @@ export default {
       query: {
         currentPage: 1, // 当前页
         offset: 10, // 一级留言数
-        informId: 0 
+        informId: 0,
       },
       /* 控制加载更多按钮禁用 */
       isLoadingMore: false,
@@ -43,9 +47,9 @@ export default {
   },
   created() {
     // 获取通知id
-    const informId = this.$route.params.informId
+    const informId = this.$route.params.informId;
     if (informId !== undefined) {
-      this.query.informId = informId
+      this.query.informId = informId;
     }
     // 获取留言展示信息
     this.getMessage(2);
@@ -64,7 +68,7 @@ export default {
         params: {
           currentPage: this.query.currentPage,
           offset: this.query.offset,
-          informId: this.query.informId
+          informId: this.query.informId,
         },
       }).then((res) => {
         // 请求失败，提示信息
@@ -84,7 +88,7 @@ export default {
             this.messages.push(element);
           });
         } else {
-          this.messages = res.data.messages
+          this.messages = res.data.messages;
         }
 
         this.total = res.data.total;

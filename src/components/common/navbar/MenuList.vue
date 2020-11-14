@@ -135,7 +135,7 @@ span {
 }
 
 .cus-drawer-menu li span {
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 700;
 }
 </style>

@@ -15,6 +15,7 @@ import mavonEditor from "mavon-editor";
 import "mavon-editor/dist/css/index.css";
 Vue.use(mavonEditor)
 
+
 Vue.config.productionTip = false
 
 // 开启vue的调试工具

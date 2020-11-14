@@ -20,7 +20,7 @@
     </el-row>
 
     <!-- 引用文章导航组件 -->
-    <div v-if="Object.keys(articleList).length !== 0">
+    <div v-if="Object.keys(articleList).length !== 0" class="animate__animated animate__bounceInDown">
       <article-nav-bar
         ref="articleNav"
         @findArticleById="findArticleByCateId"
@@ -34,31 +34,31 @@
 
     <el-row type="flex" justify="center">
       <el-col :xs="24" :sm="14" :md="12" :lg="12">
-        <!-- 查询到文章博客时 -->
-        <el-card v-if="Object.keys(articleList).length !== 0">
-          <!-- 文章列表区域 -->
-          <div>
-            <articleList
-              v-for="article in articleList"
-              :key="article.id"
-              :info="article"
-            ></articleList>
-          </div>
 
-          <!-- 分页区域 -->
-          <div>
-            <el-pagination
-              background
-              layout="prev, pager, next"
-              @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
-              :current-page="query.currentPage"
-              :page-size="query.offset"
-              :total="total"
-            >
-            </el-pagination>
-          </div>
-        </el-card>
+        <!-- 文章列表区域 -->
+        <div v-if="Object.keys(articleList).length !== 0">
+          <articleList
+            v-for="article in articleList"
+            :key="article.id"
+            :info="article"
+          ></articleList>
+        </div>
+
+        <!-- 分页区域 -->
+        <div>
+          <el-pagination
+            background
+            hide-on-single-page
+            layout="prev, pager, next"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="query.currentPage"
+            :page-size="query.offset"
+            :total="total"
+          >
+          </el-pagination>
+        </div>
+
         <!-- 未找到文章博客时 -->
         <div v-if="total === 0">
           <notFound></notFound>

@@ -1,7 +1,7 @@
 <template>
   <!-- 首页文章展示区域 -->
   <div class="article" v-if="Object.keys(info).length !== 0">
-    <div @click="toArticleDetail(info.article.id)">
+    <div @click="toArticleDetail(info.article.id)" :class="animate">
       <el-card shadow="hover">
         <!-- 标题 -->
         <h2>
@@ -29,14 +29,15 @@
             <i class="iconfont icon-dianzan1"></i>
             {{ info.article.like_count }}
           </span>
+        </p>
+
+        <div class="tag-box">
           <!-- 分类 -->
-          <el-tag size="mini" @click.stop="toCategory(info.category.id)">
+          <el-tag class="cate-item" size="mini" @click.stop="toCategory(info.category.id)">
             <i class="iconfont icon-leimupinleifenleileibie2"></i>
             {{ info.category.cate_name }}
           </el-tag>
-        </p>
-        <!-- 标签信息 -->
-        <div class="tag-box">
+          <!-- 标签信息 -->
           <el-tag
             v-for="tag in info.tag"
             :key="tag.id"
@@ -61,6 +62,20 @@ export default {
       type: Object,
       default: {},
     },
+    data() {
+      return {
+        animate: "",
+      };
+    },
+  },
+  created() {
+    /* 判断路由，根据路由显示动画效果 */
+    console.log();
+    if (this.$route.path === "/home") {
+      this.animate = "animate__animated animate__bounceInLeft";
+    } else {
+      this.animate = "animate__animated animate__bounceInUp";
+    }
   },
   methods: {
     /* 跳转到文章详情页面 */
@@ -89,7 +104,8 @@ export default {
 
 <style scoped>
 .article {
-  padding: 0 10px 15px 10px;
+  cursor: pointer;
+  padding: 0 0 15px;
 }
 
 h2 {
@@ -114,7 +130,7 @@ h2:hover {
 }
 
 .other-info span {
-  font-size: 12px;
+  font-size: 14px;
   margin-right: 6px;
 }
 
@@ -123,7 +139,7 @@ h2:hover {
 }
 
 .el-tag {
-  float: right;
+  float: left;
 }
 
 i {
@@ -132,10 +148,18 @@ i {
 
 .tag-box {
   float: left;
-  margin-bottom: 15px;
+  margin-bottom: 5px;
+}
+
+.tag-box .el-tag {
+  font-size: 13px;
+}
+
+.cate-item {
+  margin-right: 8px;
 }
 
 .tag-item {
-  margin-right: 15px;
+  margin: 0 6px 10px;
 }
 </style>

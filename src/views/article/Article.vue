@@ -1,25 +1,27 @@
 <template>
-  <div>
+  <div class="animate__animated animate__zoomIn">
     <el-row type="flex" justify="center">
       <el-col :xs="24" :sm="24" :md="18" :lg="16" :xl="12">
-        <articleItem
-          :articleData="articleData"
-          :isGivelike="isGivelike"
-          @giveLike="giveLike"
-          @imgLoad="imgLoad"
-        >
-          <articlePreview
-            slot="preview"
-            :context="context"
-            ref="artContent"
-          ></articlePreview>
-        </articleItem>
+        <div >
+          <articleItem
+            :articleData="articleData"
+            :isGivelike="isGivelike"
+            @giveLike="giveLike"
+            @imgLoad="imgLoad"
+          >
+            <articlePreview
+              slot="preview"
+              :context="context"
+              ref="artContent"
+            ></articlePreview>
+          </articleItem>
+        </div>
       </el-col>
     </el-row>
 
     <!-- 文章目录 -->
     <el-row class="app-menu">
-      <el-col :xs="0"  >
+      <el-col :xs="0">
         <ol class="js-toc"></ol>
       </el-col>
     </el-row>
@@ -143,7 +145,7 @@ export default {
           scrollSmooth: true,
           scrollSmoothOffset: -80, // 锚点定位顶部的偏移量
           headingsOffset: 120, // 目录滚动偏移量，实现文章与目录滚动同步
-          hasInnerContainers: true
+          hasInnerContainers: true,
         });
       }, 500);
     },

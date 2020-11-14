@@ -20,11 +20,6 @@
           <i class="iconfont icon-liulan"></i>
           {{ articleData.article.viewCount }}
         </li>
-        <!-- 点赞数 -->
-        <li>
-          <i class="iconfont icon-dianzan1"></i>
-          {{ articleData.article.likeCount }}
-        </li>
         <!-- 分类信息（可链接） -->
         <li>
           <el-tag size="mini">
@@ -33,34 +28,41 @@
           </el-tag>
         </li>
       </ul>
-      <!-- 标签信息（可链接） -->
-      <ul class="tags-info">
-        <li v-for="tag in articleData.tags" :key="tag.id">
-          <el-tag size="mini" type="success">
-            <i class="iconfont icon-biaoqian"></i>
-            {{ tag.tag_name }}
-          </el-tag>
-        </li>
-      </ul>
     </div>
 
     <!-- 展示图 -->
     <div class="show-img">
-      <img :src="articleData.article.showImg" @load="imgLoaded" alt="" />
+      <el-image
+        :src="articleData.article.showImg"
+        fit="contain"
+        @load="imgLoaded"
+      ></el-image>
     </div>
 
     <!-- 文章内容插槽 -->
     <slot name="preview"></slot>
+
+    <!-- 标签信息（可链接） -->
+    <ul class="tags-info">
+      <li v-for="tag in articleData.tags" :key="tag.id">
+        <el-tag size="mini" type="success">
+          <i class="iconfont icon-biaoqian1"></i>
+          {{ tag.tag_name }}
+        </el-tag>
+      </li>
+    </ul>
 
     <!-- 点赞区域 -->
     <div class="article-dianzan">
       <!-- 点赞按钮 -->
       <el-button v-if="isGivelike" @click="giveLike(1)">
         <i class="iconfont icon-dianzan" style="font-size: 20px"></i>
+        {{ articleData.article.likeCount }}
       </el-button>
       <!-- 取消点赞按钮 -->
       <el-button v-else @click="giveLike(0)" type="primary">
         <i class="iconfont icon-dianzan" style="font-size: 20px"></i>
+        {{ articleData.article.likeCount }}
       </el-button>
     </div>
 
@@ -73,13 +75,10 @@
         }}
       </span>
     </div>
-
   </div>
 </template>
 
 <script>
-
-
 export default {
   props: {
     articleData: {
@@ -94,13 +93,12 @@ export default {
     /* 访客点赞类型 */
     giveLike(type) {
       // 发送事件通知父组件，
-      this.$emit('giveLike', type)
+      this.$emit("giveLike", type);
     },
     /* 图片加载完成通知父组件 */
     imgLoaded() {
-      console.log('img------load');
-      this.$emit('imgLoad')
-    }
+      this.$emit("imgLoad");
+    },
   },
 };
 </script>
@@ -109,7 +107,7 @@ export default {
 
 
 .content-bd {
-  padding: 10px 10px;
+  padding: 10px 0;
 }
 
 .article-title {
@@ -130,6 +128,7 @@ export default {
   margin-right: 14px;
   color: #7f7f7f;
   list-style: none;
+  font-size: 15px;
 }
 
 .ul-info li i {
@@ -140,12 +139,17 @@ export default {
   width: 100%;
   height: 40px;
   line-height: 30px;
+  border-bottom: solid 1px rgba(100, 100, 100, 0.3);
 }
 
 .tags-info li {
   margin-right: 15px;
   float: left;
   list-style: none;
+}
+
+.tags-info li .el-tag {
+  font-size: 15px;
 }
 .show-img {
   margin-top: 10px;
@@ -154,8 +158,6 @@ export default {
 .show-img img {
   width: 100%;
 }
-
-
 
 .last-update {
   margin-top: 20px;
@@ -173,10 +175,9 @@ export default {
 }
 
 .article-dianzan {
+  margin-top: 14px;
   display: block;
   width: 100%;
   text-align: center;
 }
-
-
 </style>
