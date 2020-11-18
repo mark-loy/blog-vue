@@ -86,7 +86,7 @@ export default {
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 2000;
+  z-index: 1999;
 
   background-color: #4d5f6c !important;
   margin-bottom: 15px;

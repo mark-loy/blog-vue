@@ -34,6 +34,7 @@
     <div class="show-img">
       <el-image
         :src="articleData.article.showImg"
+        :preview-src-list="imgPreviewList"
         fit="contain"
         @load="imgLoaded"
       ></el-image>
@@ -88,7 +89,13 @@ export default {
       type: Boolean,
     },
   },
-
+  computed: {
+    imgPreviewList() {
+      let imgList = []
+      imgList.push(this.articleData.article.showImg)
+      return imgList
+    }
+  },
   methods: {
     /* 访客点赞类型 */
     giveLike(type) {

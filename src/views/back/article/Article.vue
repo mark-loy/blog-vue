@@ -28,7 +28,7 @@
           <template slot-scope="scope">
             <el-tag
               class="blog-tag"
-              type="warning"
+              type="success"
               size="mini"
               v-for="tag in scope.row.tag"
               :key="tag.id"
@@ -154,6 +154,9 @@
           <!-- 文章内容添加区域 -->
           <mavon-editor
             v-model="articleForm.context"
+            @imgAdd="$imgAdd"
+            @imgDel="$imgDel"
+            ref="md"
             style="min-height: 500px"
           ></mavon-editor>
         </el-form-item>
@@ -180,7 +183,13 @@
 <script>
 import { adminRequest } from "plugins/network";
 
-import { categoryMixin, tagMixin } from "common/mixin";
+import {
+  categoryMixin,
+  tagMixin,
+  imgAddMixin,
+  imgDelMixin,
+  elUploadMixin,
+} from "common/mixin";
 
 /* 导入富文本编辑器 */
 import { mavonEditor } from "mavon-editor";
@@ -214,19 +223,9 @@ export default {
       editorOption: {
         placeholder: "文章内容",
       },
-      /* 图片上传地址 */
-      imageURL: imageUrl,
-      /* 图片上传请求头 */
-      imageHeader: {
-        Authorization: window.sessionStorage.getItem("admin-token"),
-      },
-      /* 控制图片预览对话框显示、隐藏 */
-      imagePreviewDialog: false,
-      /* 图片预览路径 */
-      imagePreView: "",
     };
   },
-  mixins: [categoryMixin, tagMixin],
+  mixins: [categoryMixin, tagMixin, imgAddMixin, imgDelMixin, elUploadMixin],
   created() {
     // 调用文章列表数据
     this.getArticleData();
@@ -309,7 +308,6 @@ export default {
     },
     /* 打开修改文章对话框 */
     updateDialog(articleData) {
-      console.log(articleData);
       // 设置当前编辑对象的原有值
       this.articleForm.id = articleData.article.id;
       this.articleForm.title = articleData.article.title;
@@ -344,35 +342,6 @@ export default {
       this.query.currentPage = val;
       // 刷新页面数据
       this.getArticleData();
-    },
-    /* 文件上传成功 */
-    handleSuccess(response) {
-      if (response.code !== 200) return this.$message.error("图片上传失败！");
-      // 成功
-      this.$message.success("图片上传成功！");
-      // 设置表单展示图属性
-      this.articleForm.showImg = response.data.url;
-    },
-    /* 上传文件预览 */
-    handlePreview(file) {
-      // 打开图片预览对话框
-      this.imagePreviewDialog = true;
-      // 设置url
-      this.imagePreView = file.response.data.url;
-    },
-    /* 移除上传的文件 */
-    handleRemove(file) {
-      // 获取文件名
-      const fileName = file.response.data.fileName;
-      // 发送请求
-      adminRequest({
-        method: "delete",
-        url: `/back/file/delete/${fileName}`,
-      }).then((res) => {
-        if (res.code !== 200) return this.$message.error("移除图片失败");
-        // 成功
-        this.$message.success("移除图片成功");
-      });
     },
   },
 };

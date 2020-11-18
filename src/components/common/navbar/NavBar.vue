@@ -37,7 +37,7 @@
           </el-col>
 
           <!-- 移动登录按钮 -->
-          <el-col :xs="2" :sm="0">
+          <el-col :xs="2" :sm="0" style="margin-left: 25px">
             <el-button
               v-if="isShowLoginBtn"
               type="primary"
@@ -51,7 +51,7 @@
           </el-col>
 
           <!-- 折叠列 -->
-          <el-col :xs="3" :sm="0">
+          <el-col :xs="2" :sm="0">
             <span @click="showDrawer">
               <i class="iconfont icon-zhedie cus-icon"></i>
             </span>
@@ -219,7 +219,7 @@ export default {
 }
 
 .login-dialog li i:hover {
-  color: skyblue;
+  color: #3eaf7c;
   cursor: pointer;
 }
 
