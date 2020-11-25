@@ -2,12 +2,11 @@
   <div class="animate__animated animate__zoomIn">
     <el-row type="flex" justify="center">
       <el-col :xs="24" :sm="24" :md="18" :lg="16" :xl="12">
-        <div >
+        <div>
           <articleItem
             :articleData="articleData"
             :isGivelike="isGivelike"
             @giveLike="giveLike"
-            @imgLoad="imgLoad"
           >
             <articlePreview
               slot="preview"
@@ -19,12 +18,7 @@
       </el-col>
     </el-row>
 
-    <!-- 文章目录 -->
-    <el-row class="app-menu">
-      <el-col :xs="0">
-        <ol class="js-toc"></ol>
-      </el-col>
-    </el-row>
+
   </div>
 </template>
 
@@ -33,9 +27,6 @@ import articleItem from "./ArticleItem";
 import articlePreview from "./ArticlePreview";
 
 import { request } from "plugins/network";
-
-/* 目录生成css */
-import tocbot from "tocbot";
 
 export default {
   components: {
@@ -133,58 +124,13 @@ export default {
         this.$message.error("登录后点赞");
       }
     },
-    /* 监听子组件中图片加载后回调 */
-    imgLoad() {
-      // 图片加载完成，再生成目录信息
-      setTimeout(() => {
-        this.addMao();
-        tocbot.init({
-          tocSelector: ".js-toc", //要把目录添加元素位置，支持选择器
-          contentSelector: ".js-toc-content", //获取html的元素
-          headingSelector: "h1, h2, h3", //要显示的id的目录
-          scrollSmooth: true,
-          scrollSmoothOffset: -80, // 锚点定位顶部的偏移量
-          headingsOffset: 120, // 目录滚动偏移量，实现文章与目录滚动同步
-          hasInnerContainers: true,
-        });
-      }, 500);
-    },
-    /* 给自动生成目录的h标签，添加id */
-    addMao() {
-      // 获取内容中的所有子节点
-      let parentNodes = this.$refs.artContent.$children[0].$el.children[1]
-        .children[1].childNodes[0];
-      console.log(parentNodes);
-      if (parentNodes.className !== null) {
-        parentNodes.className = parentNodes.className + " js-toc-content";
-      }
-      const nodes = parentNodes.children;
-      if (nodes.length) {
-        // 定义匹配H类标签的正则
-        const reg = /^H[1-6]{1}$/;
-        for (let i = 0; i < nodes.length; i++) {
-          let node = nodes[i];
-          // 匹配节点名是否是h1 ~ h6
-          if (reg.exec(node.tagName)) {
-            node.id = node.firstElementChild.id;
-            node.firstElementChild.removeAttribute("id");
-          }
-        }
-      }
-    },
+
   },
 };
 </script>
 
 <style scoped>
-/* 引入自动生成目录的css */
-@import "~assets/css/tocbot.css";
 
-.app-menu {
-  width: 200px;
-  position: fixed;
-  right: 10px;
-  top: 150px;
-  z-index: 2000;
-}
+
+
 </style>

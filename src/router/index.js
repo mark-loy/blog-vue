@@ -17,7 +17,7 @@ const tag = () => import('views/tag/Tag')
 const timeLine = () => import('views/timeLine/TimeLine')
 const article = () => import('views/article/Article')
 const message = () => import('views/message/Message')
-const login = () => import('components/common/login/Login')
+const visitorLogin = () => import('components/common/login/VisitorLogin')
 
 // 后台管理路由
 const welcome = () => import('views/back/welcome/Welcome')
@@ -66,8 +66,14 @@ const routes = [{
     name: 'message'
   },
   {
-    path: '/login',
-    component: login
+    path: '/login/git',
+    component: visitorLogin,
+    name: 'github'
+  },
+  {
+    path: '/login/qq',
+    component: visitorLogin,
+    name: 'qq'
   },
   {
     path: '/admin/login',

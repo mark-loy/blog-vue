@@ -53,18 +53,18 @@ module.exports = {
   },
   devServer: {
     proxy: { //配置跨域
-      '/github': {
+      '/github/token': {
         target: 'https://github.com', // 跨域的目标地址
         changOrigin: true, // 允许跨域
         pathRewrite: { // 路径重写
-          '^/github': '/'
+          '^/github/token': '/'
         }
       },
-      '/getUser': {
+      '/github/user': {
         target: 'https://api.github.com',
         changOrigin: true, // 允许跨域
         pathRewrite: { // 路径重写
-          '^/getUser': '/'
+          '^/github/user': '/'
         }
       },
     }

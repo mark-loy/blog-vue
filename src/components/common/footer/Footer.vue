@@ -1,8 +1,8 @@
 <template>
   <div class="footer">
     <div class="footer-box">
-      <p>aaa</p>
-      <p><a href="http://www.beian.miit.gov.cn/">粤ICP备20013507号</a></p>
+      <p>Copyright © 2020-2021 MBlog</p>
+      <p><a href="http://www.beian.miit.gov.cn/">湘ICP备2020021755号-1</a></p>
     </div>
   </div>
 </template>

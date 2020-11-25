@@ -15,7 +15,7 @@
       <div class="visitor-box">
         <span class="visitor-name"> {{ message.visitor.visitor_name }} </span>
         <span class="visitor-other"
-          >来源：{{ source(message.visitor.source) }}</span
+          >来源：{{ message.visitor.source === 1 ? "Github" : "QQ" }}</span
         >
       </div>
 
@@ -91,13 +91,6 @@ export default {
     return {
       isMessageTextarea: false,
     };
-  },
-  computed: {
-    source() {
-      return function (source) {
-        return source === 1 ? "Github" : "QQ";
-      };
-    },
   },
   methods: {
     showMessageTextarea() {

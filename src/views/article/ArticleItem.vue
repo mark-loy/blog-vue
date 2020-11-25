@@ -36,7 +36,6 @@
         :src="articleData.article.showImg"
         :preview-src-list="imgPreviewList"
         fit="contain"
-        @load="imgLoaded"
       ></el-image>
     </div>
 
@@ -101,10 +100,6 @@ export default {
     giveLike(type) {
       // 发送事件通知父组件，
       this.$emit("giveLike", type);
-    },
-    /* 图片加载完成通知父组件 */
-    imgLoaded() {
-      this.$emit("imgLoad");
     },
   },
 };
