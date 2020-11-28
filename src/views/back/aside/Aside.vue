@@ -16,11 +16,11 @@
           <span>用户管理</span>
         </template>
         <el-menu-item @click="toVisitor">
-          <i class="iconfont icon-leimupinleifenleileibie2"></i
+          <i class="iconfont icon-liebiao"></i
           >访客列表</el-menu-item
         >
         <el-menu-item @click="toAdmin">
-          <i class="iconfont icon-leimupinleifenleileibie2"></i
+          <i class="iconfont icon-liebiao"></i
           >管理员列表</el-menu-item
         >
       </el-submenu>
@@ -30,28 +30,38 @@
           <span>文章管理</span>
         </template>
         <el-menu-item @click="toArticle">
-          <i class="iconfont icon-leimupinleifenleileibie2"></i
+          <i class="iconfont icon-liebiao"></i
           >文章列表</el-menu-item
         >
       </el-submenu>
       <el-submenu index="3">
         <template slot="title">
-          <i class="iconfont icon-fenlei"></i>
+          <i class="iconfont icon-leimupinleifenleileibie2"></i>
           <span>分类管理</span>
         </template>
         <el-menu-item @click="toCategory">
-          <i class="iconfont icon-leimupinleifenleileibie2"></i
+          <i class="iconfont icon-liebiao"></i
           >分类列表</el-menu-item
         >
       </el-submenu>
       <el-submenu index="4">
         <template slot="title">
-          <i class="iconfont icon-biaoqian"></i>
+          <i class="iconfont icon-biaoqian1"></i>
           <span>标签管理</span>
         </template>
         <el-menu-item @click="toTag">
-          <i class="iconfont icon-leimupinleifenleileibie2"></i
+          <i class="iconfont icon-liebiao"></i
           >标签列表</el-menu-item
+        >
+      </el-submenu>
+      <el-submenu index="5">
+        <template slot="title">
+          <i class="iconfont icon-w_liuyan"></i>
+          <span>留言管理</span>
+        </template>
+        <el-menu-item @click="toMessage">
+          <i class="iconfont icon-liebiao"></i
+          >留言列表</el-menu-item
         >
       </el-submenu>
     </el-menu>
@@ -82,6 +92,9 @@ export default {
     },
     toAdmin() {
       this.$router.push("/back/admin");
+    },
+    toMessage() {
+      this.$router.push("/back/message");
     },
     /* 侧边栏的折叠与展开 */
     collapseAside() {

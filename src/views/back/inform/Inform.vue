@@ -21,8 +21,9 @@
               class="inform-content"
               @click="toMessage(inform.id)"
               type="success"
-              >{{ getInformContent(inform.message.content) }}</span
+              >{{ getInformContent(inform.message.content, inform.message.parentId) }}</span
             >
+            <el-badge :value="inform.message.state ? '' : '待审核'" class="item"></el-badge>
           </span>
           <span v-else>
             点赞了文章
@@ -62,7 +63,10 @@ export default {
       });
     },
     /*  */
-    getInformContent(content) {
+    getInformContent(content, parentId) {
+      if (parentId === 0) {
+        return content;
+      }
       return content.split(
         '<span style="font-weight: 700; color: #3eaf7c">@mark-loy</span>'
       )[1];

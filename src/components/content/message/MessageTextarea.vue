@@ -145,7 +145,7 @@ export default {
       }).then((res) => {
         console.log(res);
         if (res.code !== 200) return this.$message.eroor("留言失败");
-        this.$message.success("留言成功");
+        this.$message.success("留言成功，请等待审核！");
         // 清空文本域
         this.content = "";
         // 判断是否为子留言
