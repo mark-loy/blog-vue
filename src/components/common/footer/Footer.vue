@@ -9,7 +9,7 @@
           href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=43070302000277"
           style="color: #ff1c04"
         >
-          <img src="~assets/imgs/备案图标.png" style="vertical-align: bottom; margin-right: 8px" /> 
+          <img src="~assets/imgs/beiantubiao.png" style="vertical-align: bottom; margin-right: 8px" /> 
           湘公网安备 43070302000277号 
         </a>
       </p>

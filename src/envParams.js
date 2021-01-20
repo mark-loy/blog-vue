@@ -34,11 +34,11 @@ switch (process.env.NODE_ENV) {
     break
   case 'production':
     //url
-    logoUrl = "https://www.lishuqi.top/"
-    baseUrl = "https://8.131.86.202:8888/private/api"
+    logoUrl = "http://www.lishuqi.top/"
+    baseUrl = "http://8.131.86.202:8888/private/api"
     loginGithubUrl = "https://github.com/login/oauth/authorize?client_id=941034207570ce50a8c4&redirect_uri=https://www.lishuqi.top/login/git&scope=user&state=fbc9b373-1375-11eb-a817-005056c00001"
     loginQQUrl = "https://graph.qq.com/oauth2.0/authorize?response_type=code&client_id=101908663&redirect_uri=https://www.lishuqi.top/login/qq&state=fbc9b373-1375-11eb-a817-005056c00001"
-    imageUrl = "https://8.131.86.202:8888/private/api/back/file/upload"
+    imageUrl = "http://8.131.86.202:8888/private/api/back/file/upload"
     //参数
     githubClientId = "941034207570ce50a8c4"
     githubClientSecret = "9a6df520deaf312428614b81333726506fba800c"

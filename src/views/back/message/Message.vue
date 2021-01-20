@@ -29,7 +29,7 @@
         </el-table-column>
         <el-table-column label="留言时间">
           <template slot-scope="scope">
-            {{ scope.row.message.gmt_create | dateFormat("yyyy-MM-dd hh:ss") }}
+            {{ scope.row.message.gmt_create | dateFormat("yyyy-MM-dd hh:mm") }}
           </template>
         </el-table-column>
         <el-table-column label="留言状态">

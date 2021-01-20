@@ -12,7 +12,7 @@
       <ul v-else class="inform-ul">
         <li v-for="inform in informData" :key="inform.id">
           <span class="time">
-            {{ inform.gmt_create | dateFormat("yyyy-MM-dd hh:ss") }}
+            {{ inform.gmt_create | dateFormat("yyyy-MM-dd hh:mm:ss") }}
           </span>
           <span class="visitor"> {{ inform.visitor.visitor_name }} </span>
           <span v-if="inform.type === 1">
